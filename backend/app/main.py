@@ -10,6 +10,8 @@ from app.api.careers import router as careers_router
 from app.api.recommendations import router as recommendations_router
 from app.api.discovery import router as discovery_router
 from app.api.math_assessment import router as math_assessment_router
+from app.api.student import router as student_router
+from app.api.career_assistant import router as assistant_router
 from app.db import init_db
 
 app = FastAPI(title="LifePath India API", version="0.1.0")
@@ -19,13 +21,15 @@ app.include_router(careers_router)
 app.include_router(recommendations_router)
 app.include_router(discovery_router)
 app.include_router(math_assessment_router)
+app.include_router(student_router)
+app.include_router(assistant_router)
 
 frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[frontend_origin],
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
