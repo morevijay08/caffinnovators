@@ -30,14 +30,14 @@ Status: **APPROVED FOR HACKATHON MVP — React + TypeScript frontend with Python
 ## Development AI assistant
 - Preferred coding assistant: Gemma 4, when available through the team's chosen editor or model interface.
 - Use it for repository understanding, planning, coding, code review, debugging, and test drafting.
-- This is a developer workflow preference, not an application dependency. No Gemma runtime, model download, hosted inference, API key, Ollama service, or LLM SDK is required.
+- Separately, Gemma 4 is an approved student-facing runtime model for TASK-014. The default inference path is FastAPI → local Ollama → configurable Gemma 4 model (initial `GEMMA_MODEL=gemma4:e2b`, `OLLAMA_BASE_URL=http://localhost:11434`; verify the installed tag). Keep inference behind FastAPI; React must never call the model directly. Hosted inference is only an explicit fallback and any credentials stay server-side and untracked.
 - Do not assume the model can access GitHub, local files, terminals, or execute tests unless the chosen tool explicitly provides those capabilities.
 
 ## Explicitly not approved for MVP
 - Next.js or a second frontend framework.
 - Tailwind, Bootstrap, shadcn/ui or another styling/component framework.
 - LangChain, LangGraph, vector DB, embeddings or RAG.
-- Student-facing hosted/local LLM, paid AI APIs or required external services.
+- Unapproved AI providers or paid APIs. Gemma 4 runtime inference for TASK-014 is explicitly approved; follow `.ai/ARCHITECTURE.md` and `.ai/API_CONTRACTS.md`.
 - PostgreSQL, MongoDB, Supabase, Firebase, Redis, or any other database.
 - Authentication, analytics SDKs, paid APIs, or required external services.
 - Any package added without demonstrated need and explicit approval.
@@ -67,4 +67,4 @@ Status: **APPROVED FOR HACKATHON MVP — React + TypeScript frontend with Python
 - No secrets or external API keys should be required for the MVP.
 
 ## Future integrations
-A student-facing AI assistant, verified career-data imports, real scholarships, persistence, authentication, and production deployment require separate decisions; do not add them by default.
+Verified career-data imports, real scholarships, persistence, authentication, and production deployment require separate decisions. The Gemma 4-powered student-facing Career Assistant is explicitly approved.
