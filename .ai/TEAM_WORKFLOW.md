@@ -5,7 +5,7 @@ Let three members build independent features in parallel while reducing merge co
 
 ## Roles at a glance
 - **Member 1 — React frontend and integration:** app shell, design system, navigation, onboarding, dashboard, path switching, frontend API client, release coordination.
-- **Member 2 — Career domain and backend:** interest assessment, career data, recommendations, career details/roadmaps, discovery activities and rule-based career guidance API.
+- **Member 2 — Career domain and backend:** interest assessment, career data, recommendations, career details/roadmaps, discovery activities and Gemma 4-powered Career Assistant API (TASK-014).
 - **Member 3 — Readiness backend and tests:** timed math assessment, topic analysis, improvement/retest, fictional affordability demo data, API/service tests and test coordination.
 
 See `.ai/roadmap/MEMBER_TASK_ASSIGNMENTS.md` for task IDs, dependencies and ownership.
@@ -40,7 +40,7 @@ At the beginning of each coding session, use Gemma 4 when available and provide:
 3. Dependencies, acceptance criteria and allowed file paths.
 4. Relevant request/response schema.
 5. Instruction to inspect first, plan, implement only the task, run relevant checks, and show a diff summary.
-Review all changes. If Gemma 4 is unavailable, disclose it; do not mislabel another model. The running app must not require Gemma 4.
+Review all changes. If Gemma 4 is unavailable, disclose it; do not mislabel another model. The running Career Assistant is expected to use Gemma 4 at runtime through the backend adapter. Keep this separate from the development coding assistant.
 
 ## Standard feature workflow
 1. Sync latest `integration`.
@@ -60,7 +60,7 @@ Review all changes. If Gemma 4 is unavailable, disclose it; do not mislabel anot
 - Keep Pydantic schemas and TypeScript types aligned with `.ai/API_CONTRACTS.md`.
 - Configure local CORS for the actual frontend origin only.
 - Use a consistent error format and handle loading, empty and failed requests in the UI.
-- Do not add auth, database or external API integrations to the MVP.
+- Do not add auth or a database. Gemma 4 inference for TASK-014 is explicitly approved; use local Ollama by default and keep any hosted provider credentials server-side.
 
 ## Conflict prevention and resolution
 - One owner per file per task; keep PRs small.
@@ -78,3 +78,10 @@ Review all changes. If Gemma 4 is unavailable, disclose it; do not mislabel anot
 
 ## Definition of integrated
 A task is integrated only after its PR is merged to `integration` and the combined frontend/backend is checked. A branch push alone does not mean the feature is integrated or complete.
+
+
+## Gemma 4 runtime integration
+- Member 2 owns TASK-014's system prompt, model adapter/service and assistant route; Member 1 owns the React chat UI and typed API client; Member 3 coordinates timeout, unavailable-model and malformed-response tests.
+- Local default: FastAPI calls Ollama at the configured backend URL; do not expose the Ollama endpoint to the browser.
+- Do not make career matching or math scoring dependent on generated chatbot output. If the model is unavailable, show a clear recoverable error rather than pretending a rule-based answer came from Gemma 4.
+- Confirm model tag and local hardware/runtime before the final demo; hosted inference is an explicit fallback decision, not a hidden substitution.
