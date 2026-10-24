@@ -47,3 +47,8 @@
 ## TASK-006 — task5
 - Career catalogue API, static fictional dataset, React Career Explorer and illustrative detail route.
 - No new dependencies, external services, database, recommendations or roadmap implementation. Tests pending local execution.
+
+## 2026-10-25 — TASK-007 career recommendations
+- Added `backend/app/services/career_recommendations.py`, recommendation API/schema/tests and typed React suggestions component/client.
+- Reused TASK-005 answers and TASK-006 career IDs; no additional third-party packages.
+- Local test verification and shared integration remain pending.
