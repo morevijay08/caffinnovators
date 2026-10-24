@@ -34,7 +34,7 @@ export default function OnboardingPage() {
     const validationError = validate(step, draft);
     if (validationError) { setError(validationError); return; }
     if (step < steps.length - 1) { setStep(step + 1); setError(null); return; }
-    // Store in React memory only. The API does not yet have a student-profile contract.
+    // Persist the student profile through the authenticated journey context.
     setProfile({
       educationLevel: draft.educationLevel as EducationLevel,
       interests: [...draft.interests],
@@ -57,7 +57,7 @@ export default function OnboardingPage() {
         <div><dt>Goal</dt><dd>{profile?.goal ?? draft.goal}</dd></div>
         {(profile?.careerIdea ?? draft.careerIdea) && <div><dt>Career idea</dt><dd>{profile?.careerIdea ?? draft.careerIdea}</dd></div>}
       </dl>
-      <p className="privacy-message">Saved temporarily in this open app session only. Refreshing the page will clear your details. Your interest assessment and career suggestions are available now.</p>
+      <p className="privacy-message">Saved to your student account in the local SQLite database. Refreshing will restore your details after sign-in. Your interest assessment and career suggestions are available now.</p>
       <div className="onboarding-actions">
         <button className="btn btn-secondary" type="button" onClick={() => { setDraft(createDraft(profile)); setStep(0); setFinished(false); }}>Edit answers</button>
         <button className="btn btn-outline-danger" type="button" onClick={restart}>Clear answers</button>
@@ -76,6 +76,6 @@ export default function OnboardingPage() {
       {error && <p className="form-error" role="alert">{error}</p>}
       <div className="onboarding-actions">{step > 0 ? <button type="button" className="btn btn-secondary" onClick={back}>← Previous</button> : <Link className="btn btn-secondary" to="/">← Back home</Link>}<button className="btn btn-primary" type="submit">{step === steps.length - 1 ? "Save and continue ↗" : "Continue →"}</button></div>
     </form>
-    <p className="privacy-message">Your answers stay in browser memory for this session only. No account, database, or backend profile is created.</p>
+    <p className="privacy-message">Your answers are saved to your student account in the local SQLite database.</p>
   </section></main>;
 }
