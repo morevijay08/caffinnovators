@@ -14,8 +14,8 @@ async function parseJson<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export async function getInterestQuestions(signal?: AbortSignal): Promise<InterestQuestionList> {
-  return parseJson<InterestQuestionList>(await fetch(`${BASE_URL}/api/v1/interest-assessment`, { signal }));
+export async function getInterestQuestions(signal?: AbortSignal, interests: string[] = []): Promise<InterestQuestionList> {
+  return parseJson<InterestQuestionList>(await fetch(`${BASE_URL}/api/v1/interest-assessment${interests.length ? `?${new URLSearchParams(interests.map(value => ["interests", value])).toString()}` : ""}`, { signal }));
 }
 
 export async function submitInterestAnswers(answers: InterestAnswer[]): Promise<InterestResult> {
