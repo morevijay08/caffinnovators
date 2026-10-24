@@ -15,9 +15,10 @@ import ScholarshipsPage from "./pages/ScholarshipsPage";
 import CareerAssistantPage from "./pages/CareerAssistantPage";
 import AuthPage from "./pages/AuthPage";
 import { useStudentJourney } from "./state/StudentJourney";
+import type { ReactNode } from "react";
 import { StudentJourneyProvider } from "./state/StudentJourney";
 
-function Protected({children}:{children:React.ReactNode}){const {account,authLoading}=useStudentJourney();if(authLoading)return <main className="container"><p role="status">Restoring your saved journey…</p></main>;if(!account)return <main className="container"><h1>Sign in to continue</h1><p>Your career exploration and progress are saved to your account.</p><Link className="btn btn-primary" to="/auth">Create account or sign in</Link></main>;return <>{children}</>;}
+function Protected({children}:{children:ReactNode}){const {account,authLoading}=useStudentJourney();if(authLoading)return <main className="container"><p role="status">Restoring your saved journey…</p></main>;if(!account)return <main className="container"><h1>Sign in to continue</h1><p>Your career exploration and progress are saved to your account.</p><Link className="btn btn-primary" to="/auth">Create account or sign in</Link></main>;return <>{children}</>;}
 
 export default function App() {
   return (
