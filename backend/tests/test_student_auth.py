@@ -52,3 +52,17 @@ def test_same_origin_and_unauthorized_mutation():
         assert client.get("/api/v1/journey").status_code==200
         client.post("/api/v1/auth/logout")
         assert client.patch("/api/v1/journey",json={"field":"selectedCareerId","value":"software-developer"}).status_code==401
+
+
+def test_auth_works_from_vite_fallback_port():
+    with TestClient(app) as client:
+        from uuid import uuid4
+        credentials={"username":"vite_"+uuid4().hex[:12],"password":"correct_horse_2026"}
+        origin="http://localhost:5174"
+        response=client.post("/api/v1/auth/register",json=credentials,headers={"Origin":origin})
+        assert response.status_code == 201, response.text
+        assert client.get("/api/v1/auth/me").status_code == 200
+        saved=client.patch("/api/v1/journey",headers={"Origin":origin},json={"field":"selectedCareerId","value":"example-career"})
+        assert saved.status_code == 200, saved.text
+        assert client.post("/api/v1/auth/logout",headers={"Origin":origin}).status_code == 204
+        assert client.post("/api/v1/auth/login",json=credentials,headers={"Origin":origin}).status_code == 200
