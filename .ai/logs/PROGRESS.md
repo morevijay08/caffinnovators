@@ -58,3 +58,8 @@
 - Implemented server-scored deterministic career matches, explainable ranking and POST API with Pydantic validation.
 - Connected completed interest quiz to five career suggestions and illustrative catalogue detail pages.
 - Added API tests. Live builds, test execution and integration are pending user review.
+
+## TASK-011 — Change My Path feature (task7)
+- Added catalogue-backed path selection, explicit confirmation and current choice/history UI.
+- Shared React context now retains onboarding and completed interest assessment throughout in-app career switching.
+- Browser and build checks are pending local user review. No other members' backend services were changed.
