@@ -5,11 +5,19 @@ The TestClient uses the app's configured test/runtime database; attempts are ano
 """
 from uuid import UUID
 
+import pytest
+
 from fastapi.testclient import TestClient
 
 from app.main import app
 
-client = TestClient(app)
+@pytest.fixture(autouse=True, scope="module")
+def run_app_lifespan():
+    """Initialize the SQLite schema through the app startup lifecycle."""
+    with TestClient(app) as client:
+        globals()["client"] = client
+        yield
+    globals().pop("client", None)
 
 
 def _assessment():
