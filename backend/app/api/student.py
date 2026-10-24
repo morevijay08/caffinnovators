@@ -26,6 +26,8 @@ FIELDS = {
     "pathHistory": TypeAdapter(list[PathChange]),
     "reflections": TypeAdapter(dict[str,str]),
     "chatHistory": TypeAdapter(list[ChatMessage]),
+    "mathResult": TypeAdapter(__import__("app.schemas.math_readiness", fromlist=["MathAssessmentResult"]).MathAssessmentResult | None),
+    "comparison": TypeAdapter(list[str]),
 }
 
 def set_cookie(response: Response, token: str):
@@ -36,7 +38,7 @@ def set_cookie(response: Response, token: str):
 def get_state(db: Session, student_id: str) -> StudentJourney:
     row = db.get(StudentJourney, student_id)
     if row is None:
-        row = StudentJourney(student_id=student_id, path_history_json="[]", reflections_json="{}", chat_history_json="[]")
+        row = StudentJourney(student_id=student_id, path_history_json="[]", reflections_json="{}", chat_history_json="[]", comparison_json="[]")
         db.add(row)
         db.flush()
     return row
@@ -49,6 +51,8 @@ def public_state(row: StudentJourney) -> JourneyData:
         pathHistory=json.loads(row.path_history_json),
         reflections=json.loads(row.reflections_json),
         chatHistory=json.loads(row.chat_history_json),
+        mathResult=json.loads(row.math_result_json) if row.math_result_json else None,
+        comparison=json.loads(row.comparison_json),
     )
 
 @router.post("/auth/register", response_model=StudentIdentity, status_code=201)
@@ -106,6 +110,8 @@ def patch_journey(patch: JourneyPatch, request: Request, student: Student = Depe
             raise ValueError("Career ID is too long.")
         if patch.field == "pathHistory" and len(parsed) > 100:
             raise ValueError("Path history is too long.")
+        if patch.field == "comparison" and (len(parsed) > 3 or any(len(v)>100 for v in parsed)):
+            raise ValueError("Invalid career comparison.")
         if patch.field == "chatHistory" and len(parsed) > 20:
             raise ValueError("Chat history is too long.")
         if patch.field == "reflections" and (len(parsed)>50 or any(len(k)>100 or len(v)>800 for k,v in parsed.items())):
@@ -117,10 +123,12 @@ def patch_journey(patch: JourneyPatch, request: Request, student: Student = Depe
         row.profile_json = parsed.model_dump_json() if parsed is not None else None
     elif patch.field == "assessment":
         row.assessment_json = parsed.model_dump_json() if parsed is not None else None
+    elif patch.field == "mathResult":
+        row.math_result_json = parsed.model_dump_json() if parsed is not None else None
     elif patch.field == "selectedCareerId":
         row.selected_career_id = parsed
     else:
-        attr = {"pathHistory":"path_history_json","reflections":"reflections_json","chatHistory":"chat_history_json"}[patch.field]
+        attr = {"pathHistory":"path_history_json","reflections":"reflections_json","chatHistory":"chat_history_json","comparison":"comparison_json"}[patch.field]
         setattr(row, attr, json.dumps([v.model_dump() for v in parsed] if patch.field in ("pathHistory","chatHistory") else parsed))
     db.commit()
     return public_state(row)
