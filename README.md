@@ -2,6 +2,9 @@
 
 **Every Interest Has a Future.** An interest-first Streamlit prototype for career exploration.
 
+Current Development
+
+This repository contains the LifePath India application, including the Streamlit frontend and FastAPI backend.
 ## TASK-002: Streamlit skeleton
 
 This branch currently implements **only the navigation and application scaffold**. The Home view and all other pages are placeholders; assessments, recommendation services, learning roadmaps, dashboards, and onboarding are not functional yet. There is no authentication, database, or student-facing AI runtime.
