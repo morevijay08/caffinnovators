@@ -12,7 +12,12 @@ import DashboardPage from "./pages/DashboardPage";
 import DiscoveryLabPage from "./pages/DiscoveryLabPage";
 import MathAssessmentPage from "./pages/MathAssessmentPage";
 import ScholarshipsPage from "./pages/ScholarshipsPage";
+import CareerAssistantPage from "./pages/CareerAssistantPage";
+import AuthPage from "./pages/AuthPage";
+import { useStudentJourney } from "./state/StudentJourney";
 import { StudentJourneyProvider } from "./state/StudentJourney";
+
+function Protected({children}:{children:React.ReactNode}){const {account,authLoading}=useStudentJourney();if(authLoading)return <main className="container"><p role="status">Restoring your saved journey…</p></main>;if(!account)return <main className="container"><h1>Sign in to continue</h1><p>Your career exploration and progress are saved to your account.</p><Link className="btn btn-primary" to="/auth">Create account or sign in</Link></main>;return <>{children}</>;}
 
 export default function App() {
   return (
@@ -20,15 +25,17 @@ export default function App() {
       <SiteHeader />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/onboarding" element={<OnboardingPage />} />
-        <Route path="/interest-assessment" element={<InterestAssessmentPage />} />
-        <Route path="/careers" element={<CareerExplorerPage />} />
-        <Route path="/careers/:careerId" element={<CareerDetailPage />} />
-        <Route path="/change-path" element={<ChangePathPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/discovery-lab" element={<DiscoveryLabPage />} />
-        <Route path="/assessment" element={<MathAssessmentPage />} />
-        <Route path="/scholarships" element={<ScholarshipsPage />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/onboarding" element={<Protected><OnboardingPage /></Protected>} />
+        <Route path="/interest-assessment" element={<Protected><InterestAssessmentPage /></Protected>} />
+        <Route path="/careers" element={<Protected><CareerExplorerPage /></Protected>} />
+        <Route path="/careers/:careerId" element={<Protected><CareerDetailPage /></Protected>} />
+        <Route path="/change-path" element={<Protected><ChangePathPage /></Protected>} />
+        <Route path="/dashboard" element={<Protected><DashboardPage /></Protected>} />
+        <Route path="/discovery-lab" element={<Protected><DiscoveryLabPage /></Protected>} />
+        <Route path="/career-assistant" element={<Protected><CareerAssistantPage /></Protected>} />
+        <Route path="/assessment" element={<Protected><MathAssessmentPage /></Protected>} />
+        <Route path="/scholarships" element={<Protected><ScholarshipsPage /></Protected>} />
         <Route
           path="*"
           element={
