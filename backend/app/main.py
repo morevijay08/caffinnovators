@@ -25,10 +25,13 @@ app.include_router(student_router)
 app.include_router(assistant_router)
 
 frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
+# Vite falls back to another port if 5173 is occupied; allow loopback dev origins only.
+local_vite_origins = [f"http://{host}:{port}" for host in ("localhost", "127.0.0.1") for port in range(5173, 5181)]
+allowed_frontend_origins = list(dict.fromkeys([frontend_origin, *local_vite_origins]))
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_origin],
+    allow_origins=allowed_frontend_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PATCH"],
     allow_headers=["Content-Type"],
