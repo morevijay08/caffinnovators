@@ -40,12 +40,12 @@ E. Changes goal → preserve completed progress → compare old/new paths → ne
 9. Change My Path while preserving completed progress.
 10. Dashboard and comparison of up to three careers.
 11. Interest Discovery Lab.
-12. Transparent rule-based Career Assistant; no LLM required.
+12. Gemma 4-powered Career Assistant behind FastAPI, with safe prompt instructions, bounded context and recoverable errors.
 13. Fictional scholarship/affordability demo, clearly labelled.
 14. Feedback, empty states and useful error handling.
 
 ### MVP definition of done
-A judge can complete onboarding and an interest assessment, see multiple explained career options, open a roadmap, take a timed math test, receive topic feedback and an improvement plan, and change career choice without losing completed progress. The frontend and backend run locally using the documented commands. No API key, database or external AI service is required.
+A judge can complete onboarding and an interest assessment, see multiple explained career options, open a roadmap, take a timed math test, receive topic feedback and an improvement plan, and change career choice without losing completed progress. The frontend and backend run locally using the documented commands. No database is required. The Career Assistant uses Gemma 4 at runtime through local Ollama by default; hosted inference is optional only if the team explicitly selects it.
 
 ## 5. Approved architecture
 **React + TypeScript frontend, Python FastAPI backend, static demo data, no database.** This replaces the earlier Streamlit-only architecture by explicit user approval on 2026-10-24.
