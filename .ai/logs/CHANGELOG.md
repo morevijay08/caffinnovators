@@ -65,3 +65,7 @@
 - Added FeedbackState component and plain-CSS styles for consistent recoverable loading/error/empty UI.
 - Updated career search, interest assessment, recommendations and onboarding copy. Backend test corrections from parent branch are retained.
 - No new packages; tests not executed in connector environment.
+
+## TASK-018 (task10)
+- New backend/tests/test_integration_smoke.py exercises integrated TASK-002/005/006/007 APIs without changing feature logic.
+- Added TASK_018_REVIEW.md and tracked remaining missing all-member TASK-010 integration.
