@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import FeatureHub from "../components/FeatureHub";
 import { getCareers } from "../api/careers";
 import type { CareerSummary } from "../types/careers";
 import { useStudentJourney } from "../state/StudentJourney";
@@ -43,6 +44,7 @@ export default function DashboardPage() {
       </label>)}</div>{comparedCareers.length > 0 ? <div className="dashboard-comparison" aria-label="Career comparison">{comparedCareers.map(career => <article key={career.id}><span className="eyebrow">{career.cluster.replaceAll("-", " ")}</span><h3>{career.title}</h3><p>{career.summary}</p><h4>Interests</h4><div className="dashboard-tags">{career.interest_tags.map(tag => <span key={tag}>{tag.replaceAll("_"," ")}</span>)}</div><h4>Skills to develop</h4><div className="dashboard-tags">{career.skill_tags.map(tag => <span key={tag}>{tag.replaceAll("-"," ")}</span>)}</div><Link to={`/careers/${career.id}`}>View career ↗</Link></article>)}</div> : <p className="dashboard-empty">Choose a career above to start comparing.</p>}</>}
     </section>
     <section className="dashboard-section dashboard-next"><h2>What's next?</h2><p>{mathResult ? `Latest math readiness score: ${mathResult.percentage}%.` : 'Take the Math Assessment to save your topic scores.'}</p><Link to="/assessment">Open math assessment ↗</Link></section>
+    <FeatureHub />
     <p className="dashboard-muted">Progress and comparison choices are saved to your account. All career examples are illustrative.</p>
   </div></main>;
 }
