@@ -194,3 +194,7 @@ TASK-019 documentation was authored on `task11` based on `task10`. The source of
 
 ## TASK-008 — Illustrative career roadmaps on `task13`
 The current Member 2 task branch `task13` adds `GET /api/v1/careers/{career_id}/roadmap`. All twelve existing career profiles now have four illustrative year-labelled stages, activities and examples of portfolio milestones. The route uses the same catalogue IDs and is shown on `/careers/:careerId`. These stages are not official education or admission requirements. For local testing use `TASK_008_REVIEW.md`. This branch updates the earlier README limitation that roadmaps were not yet implemented; other pending math, affordability and Gemma modules remain unintegrated.
+
+
+## TASK-014 — Local Gemma 4 Career Assistant on `task15`
+This task branch adds an optional career-chat flow at `/career-assistant` and `POST /api/v1/career-assistant`. Unlike the earlier branch, this route now exists, but **live AI replies require local Ollama and a compatible Gemma 4 model**. The contract's initial `GEMMA_MODEL=gemma4:e2b` must be verified with `ollama list` and the installed version; alternatively set a verified Gemma 4 tag. Set backend environment variables `OLLAMA_BASE_URL` (default `http://localhost:11434`) and `GEMMA_MODEL`, then run Uvicorn. The app displays errors if Ollama is unavailable rather than creating pretend AI answers. See `TASK_014_REVIEW.md` for commands and tests. Other career suggestions and scoring remain deterministic, and the chat is not saved to a database.
