@@ -1,19 +1,27 @@
+
 import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
 from app.api.interest_assessment import router as interest_router
 from app.api.careers import router as careers_router
 from app.api.recommendations import router as recommendations_router
 from app.api.discovery import router as discovery_router
+from app.api.math_assessment import router as math_assessment_router
+from app.db import init_db
 
 app = FastAPI(title="LifePath India API", version="0.1.0")
+
 app.include_router(interest_router)
 app.include_router(careers_router)
 app.include_router(recommendations_router)
 app.include_router(discovery_router)
+app.include_router(math_assessment_router)
+
 frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[frontend_origin],
@@ -31,3 +39,9 @@ class HealthResponse(BaseModel):
 @app.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
     return HealthResponse(status="ok", service="lifepath-api")
+
+
+@app.on_event("startup")
+def initialize_database() -> None:
+    """Initialize SQLite tables for anonymous assessment result snapshots."""
+    init_db()

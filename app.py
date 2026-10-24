@@ -2,7 +2,7 @@
 import streamlit as st
 
 from components.state import initialize_session_state
-
+#Tile page initialize
 st.set_page_config(
     page_title="LifePath India",
     page_icon="🧭",

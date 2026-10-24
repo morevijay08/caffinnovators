@@ -1,6 +1,11 @@
 # LifePath India — Every Interest Has a Future
 
+Current Development
+
+This repository contains the LifePath India application, including the Streamlit frontend and FastAPI backend.
+
 **Interest-first career exploration for students.** This repository contains a React + TypeScript frontend and a Python FastAPI backend with illustrative career content and deterministic, explainable interest matching. Built as a hackathon MVP.
+
 
 > **Working application:** run the `frontend/` and `backend/` directories. Root-level `app.py` and Streamlit files are a **legacy prototype** retained for reference; they are not the current frontend.
 
