@@ -50,3 +50,9 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - POST /api/v1/recommendations returns sorted career matches, evidence-based explanations, interest tags and exploration steps. React assessment result provides a button to fetch suggestions, with retry/error UI and links to career profiles.
 - See TASK_007_REVIEW.md for the exact API shape, local testing steps, safety caveats and TASK-011 handoff.
 - Branch `task6` extends `task5`; old incompatible Member 2 discovery branch not merged. Local pytest/frontend build/manual review not observed; integration pending.
+
+## TASK-011 — Member 1 Change My Path (branch task7)
+- Built React career-switching page `/change-path` against TASK-006 catalogue IDs, with confirmation, session-only current path and path history.
+- Extended `StudentJourney` to retain completed TASK-005 assessment answers/signals and TASK-004 profile during client-side navigation; changes of career do not clear these.
+- Connected assessment completion and TASK-007 recommendations to change-path UI; see `TASK_011_REVIEW.md`.
+- No dashboard, database, durable storage or backend feature changes. Committed on GitHub; local build, pytest and browser acceptance still require confirmation. Branch chain task1 → task2 → task3 → task4 → task5 → task6 → task7.
