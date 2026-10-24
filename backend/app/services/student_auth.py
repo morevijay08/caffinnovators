@@ -58,5 +58,12 @@ def require_same_origin(request: Request) -> None:
     """Protect cookie-based writes against cross-site browser requests."""
     origin = request.headers.get("origin")
     expected = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173").rstrip("/")
-    if origin and origin.rstrip("/") != expected:
+    from urllib.parse import urlsplit
+    allowed = origin is None or origin.rstrip("/") == expected
+    if origin and not allowed:
+        parsed = urlsplit(origin)
+        allowed = (parsed.scheme == "http" and parsed.hostname in ("localhost", "127.0.0.1")
+                   and parsed.port is not None and 5173 <= parsed.port <= 5180
+                   and not parsed.username and not parsed.password)
+    if not allowed:
         raise HTTPException(status_code=403, detail="Request origin not allowed.")
