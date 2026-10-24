@@ -27,7 +27,7 @@ This mapping allocates roadmap tasks; it does not mark them complete or authoriz
 | TASK-007 | Explainable multi-career recommendation service/API | Depends on TASK-005/006; expose documented function and API interface |
 | TASK-008 | Career detail and illustrative year-by-year roadmap API | Depends on TASK-006/007; label illustrative content |
 | TASK-013 | Interest Discovery Lab activities and reflection data/logic | Depends on TASK-005/006 |
-| TASK-014 | Rule-based Career Assistant service/API and integration notes | Depends on TASK-006/007/008; no LLM/runtime API required |
+| TASK-014 | Gemma 4-powered Career Assistant service/API, safe system prompt, model adapter and integration notes | Depends on TASK-002/006/007/008 and configured Gemma 4 runtime; default path is FastAPI → local Ollama → Gemma 4 |
 
 ## Member 3 — Readiness backend and testing
 **Role:** Timed maths quiz, topic-level analysis, improvement/retest, fictional affordability demo data, readiness API and test coordination.
@@ -52,7 +52,7 @@ This mapping allocates roadmap tasks; it does not mark them complete or authoriz
 2. **Gate 2:** Agree shared schemas, API errors, local ports/CORS, temporary state and frontend type conventions; merge TASK-003/004 foundations.
 3. **Wave A:** Member 2 works on TASK-005/006 as dependencies allow; Member 3 starts TASK-009 after API/schema agreement; Member 1 builds frontend features only against agreed contracts.
 4. **Wave B:** Member 2 completes TASK-007/008; Member 3 completes TASK-010/015; Member 1 integrates TASK-011/012.
-5. **Wave C:** Member 2 completes TASK-013/014; Member 1 completes TASK-016; Member 3 coordinates TASK-017.
+5. **Wave C:** Member 2 completes TASK-013/014 including Gemma 4 runtime integration; Member 1 completes TASK-016 and chat UI/API client; Member 3 coordinates TASK-017 and chatbot failure-path tests.
 6. **Release:** All members support TASK-018; Member 1 coordinates TASK-019/020. Promote stable work to `main` only after builds, API checks and end-to-end tests.
 
 If a dependency or API contract is missing, work on another authorized independent task or ask the coordinator; do not invent an incompatible interface.
