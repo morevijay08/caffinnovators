@@ -91,3 +91,7 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 ## TASK-013 — Member 2 Discovery Lab (task14)
 - Added six illustrative activities, typed GET /api/v1/discovery-activities with interest filter, React /discovery-lab page and temporary reflection state. See TASK_013_REVIEW.md.
 - Four backend tests added; local execution and browser build unverified. No database, aptitude diagnosis or score; no shared merge.
+
+## TASK-014 — Member 2 Career Assistant (`task15`)
+- Added validated FastAPI career-assistant endpoint and async server-side Ollama adapter, cautious career-exploration system prompt, safe unavailable/timeout/malformed responses, mocked tests, and typed React chat page/navigation.
+- Default configured model `gemma4:e2b` is inherited from project contract but **not confirmed installed or valid on user's runtime**. The live model/host, local pytest and frontend build remain pending. Do not claim live AI is working or merge until verified. See TASK_014_REVIEW.md.
