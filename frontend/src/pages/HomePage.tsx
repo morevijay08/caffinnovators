@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getHealth } from "../api/client";
 
 type Status = "checking" | "connected" | "unavailable";
@@ -28,7 +29,7 @@ export default function HomePage() {
         <div className="pill"><span className="pill-dot" /> Career discovery made for Indian students</div>
         <h1>Don't just pick a career. <span className="gradient-text">Discover your path.</span></h1>
         <p className="hero-lead">Your future is bigger than a report card. Explore what you love, discover possibilities and take the next step with confidence.</p>
-        <div className="hero-actions"><a className="btn btn-primary" href="#start">Explore my future <span aria-hidden="true">↗</span></a><a className="btn btn-secondary" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a></div>
+        <div className="hero-actions"><Link className="btn btn-primary" to="/onboarding">Explore my future <span aria-hidden="true">↗</span></Link><a className="btn btn-secondary" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a></div>
         <div className="hero-trust"><span className="avatar-cluster" aria-hidden="true"><i>✦</i><i>★</i><i>◆</i></span><span>Built for the curious, the dreamers, and the still-figuring-it-out.</span></div>
       </div>
       <div className="hero-visual" aria-label="Preview of possible career paths">
@@ -40,6 +41,6 @@ export default function HomePage() {
     <section className="mission-strip"><div className="container mission-content"><strong>Not defined by marks.</strong><span className="strip-separator" aria-hidden="true">✳</span><strong>Driven by curiosity.</strong><span className="strip-separator" aria-hidden="true">✳</span><strong>Built around you.</strong></div></section>
     <section className="section section-intro" id="how-it-works"><div className="container"><div className="section-heading"><span className="eyebrow">YOUR JOURNEY, SIMPLIFIED</span><h2>Clarity comes <span>one step at a time.</span></h2><p>You don't need to have everything figured out. We're here to help you explore.</p></div><div className="steps-grid">{stages.map(step => <article className="step-card" key={step.number}><span className="step-number">{step.number}</span><h3>{step.name}</h3><p>{step.detail}</p><span className="card-arrow" aria-hidden="true">↗</span></article>)}</div></div></section>
     <section className="section section-paths" id="explore"><div className="container"><div className="paths-head"><div><span className="eyebrow">A WORLD OF POSSIBILITY</span><h2>There is more than <span>one kind of success.</span></h2></div><p>Here are just a few directions you might enjoy exploring.</p></div><div className="paths-grid">{paths.map(path => <article className={`path-card ${path.tone}`} key={path.name}><span className="path-icon" aria-hidden="true">{path.icon}</span><h3>{path.name}</h3><p>{path.detail}</p><span className="path-hint">Illustrative career cluster <span aria-hidden="true">↗</span></span></article>)}</div></div></section>
-    <section className="section final-section" id="start"><div className="container"><div className="final-card"><span className="eyebrow">YOUR FUTURE IS YOURS</span><h2>Start curious.<br /><span>Go anywhere.</span></h2><p>Interest assessments and personal recommendations are coming in the next development tasks. This first experience is your introduction to LifePath India.</p><a className="btn btn-light" href="#how-it-works">Explore how it works <span aria-hidden="true">↗</span></a><div className="api-indicator" role="status" aria-live="polite">API connection: <strong>{status === "checking" ? "Checking…" : status === "connected" ? "Connected" : "Unavailable — start FastAPI"}</strong></div></div></div></section>
+    <section className="section final-section" id="start"><div className="container"><div className="final-card"><span className="eyebrow">YOUR FUTURE IS YOURS</span><h2>Start curious.<br /><span>Go anywhere.</span></h2><p>Begin with a few simple questions about your interests. Career recommendations and assessments will be added in upcoming tasks.</p><Link className="btn btn-light" to="/onboarding">Get started <span aria-hidden="true">↗</span></Link><div className="api-indicator" role="status" aria-live="polite">API connection: <strong>{status === "checking" ? "Checking…" : status === "connected" ? "Connected" : "Unavailable — start FastAPI"}</strong></div></div></div></section>
   </main>;
 }

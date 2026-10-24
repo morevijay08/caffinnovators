@@ -11,7 +11,7 @@ export default function SiteHeader() {
       <NavLink to="/" end onClick={close}>Home</NavLink>
       <a href="/#how-it-works" onClick={close}>How it works</a>
       <a href="/#explore" onClick={close}>Explore paths</a>
-      <a className="nav-cta" href="/#start" onClick={close}>Get started <span aria-hidden="true">↗</span></a>
+      <Link className="nav-cta" to="/onboarding" onClick={close}>Get started <span aria-hidden="true">↗</span></Link>
     </nav>
   </div></header>;
 }
