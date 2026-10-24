@@ -1,6 +1,6 @@
 # TASK-009 — Timed Math Readiness Assessment
 
-Status: IN PROGRESS on `feature/TASK-009-api-integration`. The router is being wired into the TASK-002 FastAPI scaffold; API and combined test verification are still pending.
+Status: IN PROGRESS on `feature/TASK-009-sqlite-persistence`. Core assessment behavior is implemented; SQLite persistence is tracked in TASK-009A. Run combined tests and API smoke checks before marking complete.
 
 ## Owner
 Member 3 — readiness backend and tests.
@@ -22,7 +22,8 @@ The assessment declares a 600-second time limit. `elapsed_seconds` is client-rep
 - Submit stable `question_id` and `option_id` pairs; the server never trusts a client-submitted score.
 - Unknown question IDs, duplicate answers for one question and invalid option IDs return a validation error from the route.
 - Results contain total/answered/correct counts, percentage, topic breakdown, time-limit flag, supportive encouragement and a non-diagnostic disclaimer.
-- No database, external API, LLM, or personal student data is required.
+- The scoring service remains deterministic and does not use an LLM.
+- TASK-009A adds SQLite persistence of non-identifying result summaries only; no student accounts or answer-by-answer storage.
 
 ## Acceptance checklist
 - [x] Question bank and stable IDs exist.
@@ -34,6 +35,7 @@ The assessment declares a 600-second time limit. `elapsed_seconds` is client-rep
 - [ ] Run tests against the actual GitHub branch checkout when network/checkout is available.
 - [x] Register the math assessment router in the shared FastAPI application.
 - [ ] Run FastAPI endpoint smoke tests and combined backend tests on the integration branch.
+- [ ] Verify the TASK-009A SQLite persistence and retrieval endpoint tests.
 - [ ] Review the timing/anti-tampering behavior with the team before claiming secure server-enforced timing.
 
 ## Files
