@@ -8,5 +8,7 @@ def test_health_contract():
     assert response.json() == {"status": "ok", "service": "lifepath-api"}
 
 
-def test_unimplemented_feature_is_not_exposed():
-    assert TestClient(app).get("/api/v1/careers").status_code == 404
+def test_implemented_career_catalogue_is_exposed():
+    response = TestClient(app).get("/api/v1/careers")
+    assert response.status_code == 200
+    assert response.json()["total"] > 0
