@@ -4,6 +4,7 @@ export interface SavedStudentJourney {
  assessment: {answers:{question_id:string;option_id:string}[];signals:{interest:string;score:number;evidence:string}[]}|null;
  selectedCareerId:string|null; pathHistory:{careerId:string;changedAt:string}[];
  reflections:Record<string,string>; chatHistory:{role:"user"|"assistant";content:string}[];
+ mathResult:import("./client").MathAssessmentResult|null; comparison:string[];
 }
 const BASE=(import.meta.env.VITE_API_BASE_URL || "http://localhost:8000").replace(/\/$/,"");
 async function call<T>(url:string,init?:RequestInit):Promise<T>{
