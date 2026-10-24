@@ -26,6 +26,8 @@ def test_success_and_prompt_boundary(monkeypatch):
     assert captured["messages"][0]["role"] == "system"
     assert captured["messages"][-1] == {"role":"user","content":"I like science"}
     assert captured["stream"] is False
+    assert captured["think"] is False
+    assert captured["options"]["num_predict"] >= 500
 
 def test_runtime_failures_have_safe_http_status(monkeypatch):
     async def unavailable(self, url, **kwargs):
