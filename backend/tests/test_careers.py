@@ -20,7 +20,7 @@ def test_get_catalogue_matches_schema():
     assert "technology" in data["clusters"]
 
 def test_case_insensitive_search():
-    response = client.get("/api/v1/careers", params={"search":"ROBOTS"})
+    response = client.get("/api/v1/careers", params={"search":"ROBOT"})
     assert response.status_code == 200
     assert any(c["id"] == "robotics-technician" for c in response.json()["careers"])
 
