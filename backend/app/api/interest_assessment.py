@@ -1,12 +1,12 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from app.schemas.interest_assessment import Submission, QuestionList, ResultOut
 from app.services.interest_assessment import public_questions, score_answers
 
 router = APIRouter(prefix="/api/v1/interest-assessment", tags=["interest-assessment"])
 
 @router.get("", response_model=QuestionList)
-def get_questions():
-    return {"questions": public_questions(), "duration_seconds": 360}
+def get_questions(interests: list[str] = Query(default=[])):
+    return {"questions": public_questions(interests), "duration_seconds": 360}
 
 @router.post("/submit", response_model=ResultOut)
 def submit_answers(submission: Submission):
