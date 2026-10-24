@@ -74,3 +74,8 @@
 - Root causes: outdated TASK-002 health test incorrectly expects implemented career route to be 404; TASK-006 search test uses `ROBOTS` while catalogue substring search has `robotics` (case-insensitivity is not the problem).
 - Added two test-only corrections on `fix/task8-backend-tests`: career endpoint asserts 200 and nonempty catalogue; search fixture uses `ROBOT` (mixed case-insensitive partial matching). No runtime services or API contracts were changed.
 - User should rerun pytest on the fix branch. This commit has not been executed in their local environment; green status remains unverified.
+
+## TASK-016 — Member 1 (task9)
+- Implemented reusable React status/alert feedback with recovery actions and accessibility semantics.
+- Wired loading/empty/error states into Career Explorer, assessment question fetch, and career recommendations; updated obsolete onboarding completion message.
+- Based on reviewed fix/task8-backend-tests branch; no Python logic changes. Local verification outstanding.
