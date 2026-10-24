@@ -15,7 +15,8 @@ Tagline: Every Interest Has a Future.
 - Frontend: React + TypeScript + Vite + React Router + custom CSS.
 - Backend: Python 3.11+ + FastAPI + Pydantic + Uvicorn.
 - Testing: pytest for backend logic/API tests; frontend test tooling to be established in TASK-002.
-- Data: static fictional/demo content; no database.
+- Data: static fictional/demo content plus SQLite persistence for anonymous math-assessment attempt results only (approved 2026-10-24; implementation pending verification).
+- No student accounts or durable student profiles.
 - See `.ai/TECH_STACK.md` and `.ai/ARCHITECTURE.md`.
 
 ## Development AI assistant
@@ -51,3 +52,11 @@ A task is complete only when its acceptance criteria are checked and relevant va
 - TASK-014 is a real model integration behind FastAPI; local Ollama is the default. Initial configurable defaults are `OLLAMA_BASE_URL=http://localhost:11434` and `GEMMA_MODEL=gemma4:e2b`.
 - Hosted inference is optional only by explicit team decision. Deterministic career matching and assessment scoring are unchanged.
 - Documentation is updated/planned; no runtime model call or chatbot implementation is claimed yet.
+
+
+## Approved SQLite architecture change (2026-10-24)
+- User approved SQLite for anonymous math-assessment attempts; database integration and `.ai/` contract updates are assigned to Member 3.
+- Planned storage: server-calculated score summary, topic breakdown snapshot, elapsed seconds, assessment version and server timestamp. Do not persist student names or answer-by-answer submissions in this task.
+- SQLAlchemy is the ORM; SQLite is the only approved database for this scope. Database file is local and must be gitignored; `DATABASE_URL` may override the default.
+- Proposed endpoint: `GET /api/v1/math-assessment/attempts/{attempt_id}` to retrieve a saved attempt by opaque UUID. UUID is not authentication.
+- Status: branch created; implementation and tests are in progress. Do not claim the database is verified until tests and restart-persistence smoke test pass.
