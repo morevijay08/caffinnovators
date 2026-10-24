@@ -56,3 +56,7 @@
 ## TASK-011 — Member 1 (task7)
 - Added Change My Path React route, selection/confirmation UI, shared current career and path history state, and assessment-progress preservation.
 - Session-only; no additional dependencies or backend endpoints. Verification pending.
+
+## TASK-012 on task8
+- Added DashboardPage.tsx and dashboard.css, React route and header navigation for session-based summary and comparison of up to three careers.
+- No new packages or fabricated readiness metrics; remaining acceptance depends on TASK-010 and local verification.
