@@ -20,7 +20,7 @@ You are an implementation agent for LifePath India, a student career-discovery p
 - Use Gemma 4 for coding, code explanation, planning, debugging, review, and test-writing whenever the environment provides access to it.
 - Before editing, provide the required repository instructions, assigned member role, single task, allowed file paths, dependencies, API contracts, and acceptance criteria.
 - If Gemma 4 is unavailable in the current tool/editor, do not pretend it was used. Disclose the limitation and follow the user's model-selection preference.
-- The model is a development assistant, not a runtime dependency. Do not add Gemma 4, Ollama, an API key, or an LLM SDK to the app unless a separate task explicitly approves in-product AI integration.
+- The coding-assistant role and in-product role are separate. Gemma 4 is explicitly approved as the runtime model for TASK-014 Career Assistant. Implement calls only behind FastAPI using the agreed adapter; default to local Ollama. Never call Ollama/model providers directly from React.
 - Never send secrets or private student data to a model.
 
 ## Required loop
@@ -41,13 +41,13 @@ READ → INSPECT → PLAN → IMPLEMENT ONE ASSIGNED TASK → TEST → VERIFY AC
 - Interest and exploration are central; marks are not a verdict about potential.
 - Never diagnose a student or declare a career unsuitable from one short quiz.
 - Explain multiple recommendations and offer next steps.
-- Clearly label simulated assessments/assistant responses and illustrative fees.
+- Clearly label AI-generated Career Assistant responses as guidance, not official advice; label illustrative fees and demo scholarship data.
 - Never invent institutions, official links, live scholarships, eligibility rules, fees, salaries, or admission outcomes.
 - Use fictional demo student data and do not collect sensitive information.
 - Use inclusive, non-shaming language and preserve the student's agency and ability to change paths.
 
 ## Cost discipline
-No paid APIs, secrets, database, hosted AI model, or network-required third-party runtime is required for the MVP. The local frontend-to-backend HTTP API is part of the approved architecture.
+No database is required. The approved chatbot requires Gemma 4 inference; use local Ollama by default so no hosted API key is needed. If a hosted provider is explicitly selected, store its key only in an untracked backend environment file. The local frontend-to-backend HTTP API remains approved.
 
 ## Completion gate
 Run relevant checks, inspect changes, verify each acceptance criterion, update `.ai/CURRENT_STATE.md`, `.ai/logs/PROGRESS.md`, and `.ai/logs/CHANGELOG.md`, record decisions if needed, and stop after the assigned task.
