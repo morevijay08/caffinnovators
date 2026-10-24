@@ -5,11 +5,20 @@ The TestClient uses the app's configured test/runtime database; attempts are ano
 """
 from uuid import UUID
 
+import pytest
+
 from fastapi.testclient import TestClient
 
 from app.main import app
 
 client = TestClient(app)
+
+
+@pytest.fixture(scope="module", autouse=True)
+def run_app_lifespan():
+    """Initialize tables via app startup before math API test requests."""
+    with TestClient(app):
+        yield
 
 
 def _assessment():
