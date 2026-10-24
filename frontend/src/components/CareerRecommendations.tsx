@@ -25,6 +25,6 @@ export default function CareerRecommendations({ answers }: { answers: InterestAn
         <div className="recommendation-tags">{item.matching_interests.map(tag => <span key={tag}>{tag.replaceAll("_"," ")}</span>)}</div>
         <p className="recommendation-step">{item.suggested_steps[0]}</p>
         <Link to={`/careers/${item.career_id}`} className="career-link">Explore career profile ↗</Link>
-      </article>)}</div><p className="assessment-notice">{result.disclaimer}</p><Link to="/careers" className="btn btn-secondary">Browse all career options →</Link></>}
+      </article>)}</div><p className="assessment-notice">{result.disclaimer}</p><Link to="/careers" className="btn btn-secondary">Browse all career options →</Link> <Link to="/change-path" className="btn btn-primary">Change my path →</Link></>}
   </section>;
 }
