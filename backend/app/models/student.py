@@ -25,3 +25,5 @@ class StudentJourney(Base):
     path_history_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
     reflections_json: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
     chat_history_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
+    math_result_json: Mapped[str | None] = mapped_column(Text, nullable=True)
+    comparison_json: Mapped[str] = mapped_column(Text, nullable=False, default="[]")
