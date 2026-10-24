@@ -8,7 +8,7 @@ import CareerRecommendations from "../components/CareerRecommendations";
 
 type LoadState = "loading" | "ready" | "error";
 export default function InterestAssessmentPage() {
-  const { profile } = useStudentJourney();
+  const { profile, assessment, saveAssessment } = useStudentJourney();
   const [loadState, setLoadState] = useState<LoadState>("loading");
   const [questions, setQuestions] = useState<InterestQuestionList | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -45,6 +45,7 @@ export default function InterestAssessmentPage() {
     try {
       const selected = questions.questions.map(q => ({ question_id: q.id, option_id: answers[q.id] }));
       const next = await submitInterestAnswers(selected);
+      saveAssessment({ answers: selected, signals: next.signals });
       setSubmittedAnswers(selected);
       setResult(next);
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Unable to submit answers."); }
@@ -67,6 +68,7 @@ export default function InterestAssessmentPage() {
       {error && <p role="alert" className="assessment-error">{error}</p>}
       <div className="assessment-actions"><button type="button" className="btn btn-secondary" onClick={() => setIndex(i => Math.max(0,i-1))} disabled={index === 0}>← Previous</button>{index < questions.questions.length - 1 ? <button type="button" className="btn btn-primary" onClick={() => {if (!answers[current.id]) {setError("Choose an option to continue.");return;}setError("");setIndex(i=>i+1);}}>Next →</button> : <button type="button" className="btn btn-primary" disabled={submitting} onClick={finish}>{submitting ? "Submitting…" : "See my interest signals ↗"}</button>}</div>
     </section>}
+    {assessment && !result && <p className="assessment-notice">Your previous completed assessment is still saved for this app session. <Link to="/change-path">Change my career path →</Link></p>}
     <p className="assessment-small">This is a short illustrative reflection activity, not a psychological test or a prediction of success.</p>
   </div></main>;
 }
