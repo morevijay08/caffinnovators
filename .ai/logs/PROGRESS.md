@@ -93,3 +93,11 @@
 - Wrote staged five-minute student-journey demonstration and judge Q&A based only on implemented task-series screens.
 - Added final verification checklist for pytest, TypeScript build, browser walkthrough, accessibility/error states, teammate review and merge readiness.
 - Actual tests, Member 2/3 signoffs and shared release integration remain pending.
+
+## TASK-008 — Member 2 career details / roadmaps (task13)
+- Added deterministic four-stage year-by-year roadmap endpoint and career-specific project activities for 12 illustrative catalogue records.
+- Added typed React roadmap UI and styling to existing detail view. Added three automated roadmap test cases, documented contract and review steps.
+- Local pytest/frontend build/manual review pending.
+
+## TASK-013 on task14
+- Discovery Lab API and React reflection workflow implemented with six illustrative activity prompts and category filtering. Local tests/browser review pending.

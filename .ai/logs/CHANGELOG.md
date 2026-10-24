@@ -76,3 +76,10 @@
 ## TASK-020 (task12)
 - Added HACKATHON_DEMO_SCRIPT.md and TASK_020_REVIEW.md; updated .ai project tracking.
 - No application runtime code changed; final integration/release gates have not been completed.
+
+## TASK-008 (task13)
+- New backend roadmap service/schema/route/test and frontend roadmap typing, API fetch, detail-page timeline and styles.
+- Roadmap data is illustrative; no new dependencies or changes to recommendation logic.
+
+## TASK-013 on task14
+- Added Discovery Lab dataset, API, schema, backend tests, React page/client/types and styles; registered navigation. No packages added.

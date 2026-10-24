@@ -1,4 +1,4 @@
-import type { CareerList, CareerSummary } from "../types/careers";
+import type { CareerList, CareerSummary, CareerRoadmap } from "../types/careers";
 const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8000").replace(/\/$/, "");
 async function request<T>(path: string, signal?: AbortSignal): Promise<T> {
   const response = await fetch(API_BASE + path, { signal });
@@ -18,4 +18,8 @@ export function getCareers(search = "", cluster = "", signal?: AbortSignal): Pro
 }
 export function getCareer(id: string, signal?: AbortSignal): Promise<CareerSummary> {
   return request<CareerSummary>(`/api/v1/careers/${encodeURIComponent(id)}`, signal);
+}
+
+export function getCareerRoadmap(id: string, signal?: AbortSignal): Promise<CareerRoadmap> {
+  return request<CareerRoadmap>(`/api/v1/careers/${encodeURIComponent(id)}/roadmap`, signal);
 }
