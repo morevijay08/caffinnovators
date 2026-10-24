@@ -18,7 +18,7 @@ Students may be pushed toward a narrow set of careers because of marks, social e
 3. Skills can improve; a short assessment is not a diagnosis or permanent verdict.
 4. Students can change direction without losing recorded progress.
 5. Use inclusive, supportive language and minimal data collection.
-6. Label illustrative data, simulated assistant responses and demo scholarships.
+6. Label illustrative data, AI-generated assistant guidance and demo scholarships.
 7. Never fabricate official links, institutions, live scholarships, eligibility rules, fees, salaries, admission criteria, or job guarantees.
 
 ## 3. Core student journeys
