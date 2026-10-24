@@ -23,7 +23,7 @@ export default function InterestAssessmentPage() {
   const [error, setError] = useState("");
   useEffect(() => {
     const controller = new AbortController();
-    getInterestQuestions(controller.signal).then(data => {
+    getInterestQuestions(controller.signal, profile?.interests ?? []).then(data => {
       if (!controller.signal.aborted) {
         setQuestions(data);
         setTimeLeft(data.duration_seconds);
@@ -31,7 +31,7 @@ export default function InterestAssessmentPage() {
       }
     }).catch(() => { if (!controller.signal.aborted) setLoadState("error"); });
     return () => controller.abort();
-  }, [requestVersion]);
+  }, [requestVersion, profile?.interests.join("|")]);
   useEffect(() => {
     if (loadState !== "ready" || result || expired || submitting) return;
     const timer = window.setInterval(() => setTimeLeft(previous => {
@@ -57,7 +57,7 @@ export default function InterestAssessmentPage() {
   const current = questions?.questions[index];
   return <main className="assessment-page"><div className="assessment-shell">
     <span className="eyebrow">INTEREST DISCOVERY</span><h1>What feels exciting to you?</h1>
-    <p className="assessment-intro">Choose the activities you would enjoy most. There are no right or wrong answers.</p>
+    <p className="assessment-intro">Choose the activities you would enjoy most. There are no right or wrong answers.</p>{profile?.interests.length ? <p className="assessment-notice">Questions are tailored to your selected interests: <strong>{profile.interests.join(", ")}</strong>. <Link to="/onboarding">Edit interests</Link></p> : null}
     {!profile && <p className="assessment-notice">You can try this assessment without onboarding. <Link to="/onboarding">Add your student profile</Link> whenever you're ready.</p>}
     {loadState === "loading" && <FeedbackState kind="loading" title="Preparing your questions" message="Your reflection activity is loading…" />}
     {loadState === "error" && <FeedbackState kind="error" title="Questions could not be loaded" message="Start the FastAPI backend, then try again. Your onboarding information is unaffected." onRetry={() => {setLoadState("loading");setRequestVersion(n=>n+1);}} />}
