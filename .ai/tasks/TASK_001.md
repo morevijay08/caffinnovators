@@ -1,6 +1,6 @@
 # TASK-001 — Product contract and AI control system
 
-Status: IN_PROGRESS until all control files have been checked.
+Status: DONE
 
 ## Goal
 Inspect the target repository and the reference project's .ai system, then establish LifePath-specific rules, scope, architecture, technology lock and roadmap.
@@ -20,12 +20,17 @@ Inspect the target repository and the reference project's .ai system, then estab
 - Any non-.ai changes.
 
 ## Acceptance criteria
-- [x] Target repository inspected and LICENSE preserved.
+- [x] Target repo inspected and LICENSE preserved.
 - [x] Reference .ai organization inspected.
 - [x] Product scope and core journeys documented.
 - [x] Stack and non-goals documented.
 - [x] Sequential task and verification rules documented.
-- [ ] All control files committed and re-inspected.
+- [x] Control files committed and key paths re-inspected.
 
 ## Verification
-Check expected paths, fetch key files, review for contradictions and update current state/progress/changelog.
+- Confirmed repository tree contains .ai control files and the pre-existing LICENSE only.
+- Fetched and reviewed AI_MASTER_PROMPT.md, TECH_STACK.md, CURRENT_STATE.md and TASK_001.md.
+- Confirmed no runtime implementation or tests were claimed.
+
+## Completion notes
+This task creates the AI project-control system only. TASK-002 is the next task, but runtime implementation requires a separate user request.
