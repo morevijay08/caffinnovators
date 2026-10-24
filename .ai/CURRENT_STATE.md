@@ -62,3 +62,9 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - Added up-to-three career comparison against TASK-006 catalogue: summaries, interests, skills and profile links. Loading/error/empty states included.
 - TASK-010 readiness result contract is not yet integrated: no readiness scores fabricated; this acceptance criterion remains pending. See `TASK_012_REVIEW.md`.
 - Branch chain task1 → task2 → task3 → task4 → task5 → task6 → task7 → task8. GitHub file commits confirmed, local build/pytest/browser testing pending. No shared branch merge performed.
+
+## TASK-016 — Feedback and recovery polish (task9)
+- `task9` is based on `fix/task8-backend-tests`, preserving the two backend test expectation corrections and all TASK-002–TASK-012 branch work.
+- Added reusable accessible FeedbackState loading/error/empty component, career catalogue error/empty/loading feedback, interest question reload retry, career recommendation error/empty feedback and updated onboarding summary copy.
+- No new endpoints, dependencies, persistence, readiness data or Gemma integration. Review: `TASK_016_REVIEW.md`.
+- User previously indicated the backend test fix was done; exact rerun stdout was not supplied. npm build, pytest and browser regression on task9 are unverified until the user tests.

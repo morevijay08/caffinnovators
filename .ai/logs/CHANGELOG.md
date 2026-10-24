@@ -60,3 +60,8 @@
 ## TASK-012 on task8
 - Added DashboardPage.tsx and dashboard.css, React route and header navigation for session-based summary and comparison of up to three careers.
 - No new packages or fabricated readiness metrics; remaining acceptance depends on TASK-010 and local verification.
+
+## TASK-016 (task9)
+- Added FeedbackState component and plain-CSS styles for consistent recoverable loading/error/empty UI.
+- Updated career search, interest assessment, recommendations and onboarding copy. Backend test corrections from parent branch are retained.
+- No new packages; tests not executed in connector environment.
