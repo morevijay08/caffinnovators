@@ -77,3 +77,8 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 ## TASK-019 — README & setup (task11)
 - Replaced stale Streamlit-only README with current React/Vite + FastAPI two-terminal Windows and macOS/Linux instructions, exact UI/API routes, environment variables, tests, architecture, known limitations, legacy prototype note and troubleshooting.
 - Branch task11 based on task10. Review details in TASK_019_REVIEW.md. No application code, runtime dependencies, database or shared branches changed. Local verification still pending.
+
+## TASK-020 — Member 1 demo planning and final review (task12)
+- `task12` extends `task11` and adds HACKATHON_DEMO_SCRIPT.md with a five-minute walkthrough and realistic judge Q&A.
+- Added TASK_020_REVIEW.md with full test gates, team signoffs, browser walkthrough, and final integration PR/merge review.
+- This is documentary delivery only: no source-code or dependency changes, no claims that member 2/3 features have been integrated, and no claims that local tests are already green. Readiness is pending real verification on task12 and shared integration branch.

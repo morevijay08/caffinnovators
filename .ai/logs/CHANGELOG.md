@@ -72,3 +72,7 @@
 
 ## TASK-019 (task11)
 - Updated README.md and created TASK_019_REVIEW.md. Documentation only; no functional features or package updates.
+
+## TASK-020 (task12)
+- Added HACKATHON_DEMO_SCRIPT.md and TASK_020_REVIEW.md; updated .ai project tracking.
+- No application runtime code changed; final integration/release gates have not been completed.
