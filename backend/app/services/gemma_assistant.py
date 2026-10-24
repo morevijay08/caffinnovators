@@ -36,7 +36,8 @@ async def ask_gemma(message: str, history: list[dict[str, str]]) -> dict[str, st
         async with httpx.AsyncClient(timeout=httpx.Timeout(180.0, connect=10.0)) as client:
             response = await client.post(base + "/api/chat", json={
                 "model": model, "messages": messages, "stream": False,
-                "options": {"num_predict": 200, "temperature": 0.4},
+                "think": False,
+                "options": {"num_predict": 600, "temperature": 0.4},
                 "keep_alive": "10m",
             })
             response.raise_for_status()
