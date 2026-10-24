@@ -57,7 +57,7 @@ export default function OnboardingPage() {
         <div><dt>Goal</dt><dd>{profile?.goal ?? draft.goal}</dd></div>
         {(profile?.careerIdea ?? draft.careerIdea) && <div><dt>Career idea</dt><dd>{profile?.careerIdea ?? draft.careerIdea}</dd></div>}
       </dl>
-      <p className="privacy-message">Saved temporarily in this open app session only. Refreshing the page will clear your details. Interest assessment and recommendations are being built in upcoming tasks.</p>
+      <p className="privacy-message">Saved temporarily in this open app session only. Refreshing the page will clear your details. Your interest assessment and career suggestions are available now.</p>
       <div className="onboarding-actions">
         <button className="btn btn-secondary" type="button" onClick={() => { setDraft(createDraft(profile)); setStep(0); setFinished(false); }}>Edit answers</button>
         <button className="btn btn-outline-danger" type="button" onClick={restart}>Clear answers</button>
