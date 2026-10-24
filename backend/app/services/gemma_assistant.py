@@ -33,10 +33,11 @@ async def ask_gemma(message: str, history: list[dict[str, str]]) -> dict[str, st
     messages.extend({"role": item["role"], "content": item["content"]} for item in history)
     messages.append({"role": "user", "content": message})
     try:
-        async with httpx.AsyncClient(timeout=httpx.Timeout(30.0, connect=5.0)) as client:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(180.0, connect=10.0)) as client:
             response = await client.post(base + "/api/chat", json={
                 "model": model, "messages": messages, "stream": False,
-                "options": {"num_predict": 450, "temperature": 0.4},
+                "options": {"num_predict": 200, "temperature": 0.4},
+                "keep_alive": "10m",
             })
             response.raise_for_status()
             body = response.json()
