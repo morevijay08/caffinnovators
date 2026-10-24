@@ -20,7 +20,7 @@ Tasks follow dependency order. Independent work may run in parallel only after r
 
 ## Phase 2 — Secondary demo modules
 - [ ] TASK-013 — Interest Discovery Lab activities and reflection. **Owner: Member 2; depends on TASK-005/006.**
-- [ ] TASK-014 — Transparent rule-based Career Assistant API/UI. **Owner: Member 2; depends on TASK-006/007/008; no LLM required.**
+- [ ] TASK-014 — Gemma 4-powered Career Assistant API/UI. **Owner: Member 2; depends on TASK-002/006/007/008 and Gemma runtime configuration; default path is FastAPI → Ollama → Gemma 4. Member 1 owns chat UI; Member 3 coordinates failure-path tests.**
 - [ ] TASK-015 — Fictional scholarship/affordability demo using static data. **Owner: Member 3; depends on TASK-002 and demo-data contract.**
 - [ ] TASK-016 — Feedback, loading, empty and error states. **Owner: Member 1; depends on TASK-003/004 and feature integration.**
 
@@ -31,7 +31,7 @@ Tasks follow dependency order. Independent work may run in parallel only after r
 - [ ] TASK-020 — Hackathon demo script and final repository verification. **Coordinator: Member 1; all members verify their feature journeys.**
 
 ## MVP definition of done
-A judge can complete onboarding and interest assessment, review multiple explained career options, open a roadmap, take a timed math test, receive topic-level feedback and an improvement plan, and change career path without losing completed progress. The React frontend and FastAPI backend run locally using documented commands. No secret/API key, database, or external AI service is required.
+A judge can complete onboarding and interest assessment, review multiple explained career options, open a roadmap, take a timed math test, receive topic-level feedback and an improvement plan, and change career path without losing completed progress. The React frontend and FastAPI backend run locally using documented commands. No database is required. The Career Assistant uses Gemma 4 at runtime through local Ollama by default; a hosted provider is optional only if explicitly selected.
 
 ## Scope rule
-This roadmap is a delivery plan, not permission to implement everything in one pass. Work only on assigned tasks whose dependencies and API contracts are integrated. Do not introduce a student-facing AI model without explicit approval.
+This roadmap is a delivery plan, not permission to implement everything in one pass. Work only on assigned tasks whose dependencies and API contracts are integrated. Gemma 4 runtime use for TASK-014 is explicitly approved; do not add other models/providers or use the LLM for deterministic scoring without approval.
