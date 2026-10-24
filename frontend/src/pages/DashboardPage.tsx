@@ -6,9 +6,8 @@ import { useStudentJourney } from "../state/StudentJourney";
 import "../styles/dashboard.css";
 
 export default function DashboardPage() {
-  const { profile, assessment, selectedCareerId, pathHistory } = useStudentJourney();
+  const { profile, assessment, selectedCareerId, pathHistory, comparison, setComparison, mathResult } = useStudentJourney();
   const [careers, setCareers] = useState<CareerSummary[]>([]);
-  const [comparison, setComparison] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
@@ -43,7 +42,7 @@ export default function DashboardPage() {
         <span><strong>{career.title}</strong><small>{career.cluster.replaceAll("-", " ")}</small></span>
       </label>)}</div>{comparedCareers.length > 0 ? <div className="dashboard-comparison" aria-label="Career comparison">{comparedCareers.map(career => <article key={career.id}><span className="eyebrow">{career.cluster.replaceAll("-", " ")}</span><h3>{career.title}</h3><p>{career.summary}</p><h4>Interests</h4><div className="dashboard-tags">{career.interest_tags.map(tag => <span key={tag}>{tag.replaceAll("_"," ")}</span>)}</div><h4>Skills to develop</h4><div className="dashboard-tags">{career.skill_tags.map(tag => <span key={tag}>{tag.replaceAll("-"," ")}</span>)}</div><Link to={`/careers/${career.id}`}>View career ↗</Link></article>)}</div> : <p className="dashboard-empty">Choose a career above to start comparing.</p>}</>}
     </section>
-    <section className="dashboard-section dashboard-next"><h2>What's next?</h2><p>Math readiness and improvement-plan results will appear here after Member 3's TASK-009/TASK-010 APIs are integrated. No results are generated or assumed yet.</p><Link to="/careers">Browse career explorer ↗</Link></section>
-    <p className="dashboard-muted">Progress and comparison choices are temporary for this open app session. Refreshing the page clears them. All career examples are illustrative.</p>
+    <section className="dashboard-section dashboard-next"><h2>What's next?</h2><p>{mathResult ? `Latest math readiness score: ${mathResult.percentage}%.` : 'Take the Math Assessment to save your topic scores.'}</p><Link to="/assessment">Open math assessment ↗</Link></section>
+    <p className="dashboard-muted">Progress and comparison choices are saved to your account. All career examples are illustrative.</p>
   </div></main>;
 }
