@@ -73,3 +73,7 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - Added `backend/tests/test_integration_smoke.py` covering the existing health → interest quiz → recommendations → catalogue details journey, plus safe errors and filters.
 - Added `TASK_018_REVIEW.md` with browser validation steps and team handoff. `task10` is based on `task9` and preserves previous backend test corrections.
 - The TASK-010 math analysis contract is still not integrated into this task series, so **full all-member end-to-end verification remains incomplete**. Actual local pytest/build/browser test results remain pending.
+
+## TASK-019 — README & setup (task11)
+- Replaced stale Streamlit-only README with current React/Vite + FastAPI two-terminal Windows and macOS/Linux instructions, exact UI/API routes, environment variables, tests, architecture, known limitations, legacy prototype note and troubleshooting.
+- Branch task11 based on task10. Review details in TASK_019_REVIEW.md. No application code, runtime dependencies, database or shared branches changed. Local verification still pending.
