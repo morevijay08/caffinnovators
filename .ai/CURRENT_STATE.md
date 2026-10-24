@@ -44,3 +44,9 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - TASK-005 signal tags are aligned with career interest_tags; no recommendation ranking until TASK-007.
 - GitHub implementation committed, but browser tests, npm build and pytest still require user verification. See TASK_006_REVIEW.md.
 - Branch chain: task1 → task2 → task3 → task4 → task5. Shared integration merge remains separate.
+
+## TASK-007 implementation — branch task6 (2026-10-25)
+- Deterministic recommendation service uses TASK-005 validated answers and TASK-006 illustrative career catalogue, keyed by stable career IDs.
+- POST /api/v1/recommendations returns sorted career matches, evidence-based explanations, interest tags and exploration steps. React assessment result provides a button to fetch suggestions, with retry/error UI and links to career profiles.
+- See TASK_007_REVIEW.md for the exact API shape, local testing steps, safety caveats and TASK-011 handoff.
+- Branch `task6` extends `task5`; old incompatible Member 2 discovery branch not merged. Local pytest/frontend build/manual review not observed; integration pending.
