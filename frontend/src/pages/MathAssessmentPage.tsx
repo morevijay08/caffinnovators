@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getMathAssessment, getMathAttempt, submitMathAssessment, type MathAssessment, type MathAssessmentResult } from "../api/client";
 import "../styles/math-assessment.css";
+import {useStudentJourney} from "../state/StudentJourney";
 
 type Phase = "loading" | "intro" | "quiz" | "submitting" | "result" | "error";
 
 export default function MathAssessmentPage() {
+  const {saveMathResult,mathResult}=useStudentJourney();
   const [params] = useSearchParams();
   const attemptParam = params.get("attempt");
   const [phase, setPhase] = useState<Phase>("loading");
@@ -67,7 +69,8 @@ export default function MathAssessmentPage() {
     setError("");
     const elapsed = startedAt === null ? 0 : Math.min(3600, Math.floor((Date.now() - startedAt) / 1000));
     try {
-      setResult(await submitMathAssessment(Object.entries(answers).map(([question_id, option_id]) => ({ question_id, option_id })), elapsed));
+      const next=await submitMathAssessment(Object.entries(answers).map(([question_id, option_id]) => ({ question_id, option_id })), elapsed);
+      setResult(next);saveMathResult(next);
       setPhase("result");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Submission failed.");
@@ -79,7 +82,7 @@ export default function MathAssessmentPage() {
 
   if (phase === "loading") return <main className="container math-page"><p>Loading assessment…</p></main>;
   if (phase === "error") return <main className="container math-page"><h1>Assessment unavailable</h1><p role="alert">{error}</p><Link className="btn btn-primary" to="/assessment">Try again</Link></main>;
-  if (phase === "intro") return <main className="container math-page"><Link to="/" className="math-back">← LifePath India</Link><section className="math-card"><span className="eyebrow">YOUR LEARNING JOURNEY</span><h1>{assessment?.title}</h1><p>Explore your current math readiness. This practice assessment is guidance, not a measure of fixed ability.</p><div className="math-stats"><div><strong>{assessment?.question_count}</strong><span>Questions</span></div><div><strong>{Math.round((assessment?.duration_seconds ?? 600)/60)} min</strong><span>Time limit</span></div><div><strong>No account</strong><span>Required</span></div></div>{assessment?.illustrative && <p className="math-note">Illustrative practice assessment</p>}<ul><li>Choose one option for each question you answer.</li><li>Use Previous and Next to review your answers.</li><li>Unanswered questions count as not correct.</li></ul><button className="btn btn-primary" onClick={start}>Start assessment ↗</button></section></main>;
+  if (phase === "intro") return <main className="container math-page"><Link to="/" className="math-back">← LifePath India</Link><section className="math-card"><span className="eyebrow">YOUR LEARNING JOURNEY</span><h1>{assessment?.title}</h1><p>Explore your current math readiness. This practice assessment is guidance, not a measure of fixed ability.</p><div className="math-stats"><div><strong>{assessment?.question_count}</strong><span>Questions</span></div><div><strong>{Math.round((assessment?.duration_seconds ?? 600)/60)} min</strong><span>Time limit</span></div><div><strong>Account</strong><span>Signed in</span></div></div>{assessment?.illustrative && <p className="math-note">Illustrative practice assessment</p>}<ul><li>Choose one option for each question you answer.</li><li>Use Previous and Next to review your answers.</li><li>Unanswered questions count as not correct.</li></ul><button className="btn btn-primary" onClick={start}>Start assessment ↗</button></section></main>;
 
   if (phase === "result" && result) return <main className="container math-page"><Link to="/" className="math-back">← LifePath India</Link><section className="math-card"><span className="eyebrow">YOUR RESULTS</span><h1>Your effort is a starting point.</h1><div className="math-score">{result.percentage}%</div><p>{result.encouragement}</p><div className="math-stats"><div><strong>{result.correct_answers}/{result.total_questions}</strong><span>Correct</span></div><div><strong>{result.incorrect_or_unanswered}</strong><span>Incorrect or unanswered</span></div><div><strong>{Math.floor(result.elapsed_seconds/60)} min</strong><span>Elapsed</span></div></div><h2>Topic breakdown</h2>{result.topic_breakdown.map(t => <div className="math-topic" key={t.topic}><div><span>{t.topic_label}</span><strong>{t.correct}/{t.total} · {t.percentage}%</strong></div><div className="math-track"><div style={{width:`${t.percentage}%`}} /></div></div>)}{result.attempt_id && <p className="math-note">Saved attempt: <code>{result.attempt_id}</code></p>}<p className="math-disclaimer">{result.disclaimer}</p><div className="math-actions"><Link className="btn btn-primary" to="/assessment">Try again</Link><Link className="btn btn-secondary" to="/">Back home</Link></div></section></main>;
 

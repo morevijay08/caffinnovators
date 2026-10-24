@@ -199,3 +199,7 @@ TASK-019 documentation was authored on `task11` based on `task10`. The source of
 
 ## TASK-008 — Illustrative career roadmaps on `task13`
 The current Member 2 task branch `task13` adds `GET /api/v1/careers/{career_id}/roadmap`. All twelve existing career profiles now have four illustrative year-labelled stages, activities and examples of portfolio milestones. The route uses the same catalogue IDs and is shown on `/careers/:careerId`. These stages are not official education or admission requirements. For local testing use `TASK_008_REVIEW.md`. This branch updates the earlier README limitation that roadmaps were not yet implemented; other pending math, affordability and Gemma modules remain unintegrated.
+
+
+## New review branch (not yet merged): Student accounts and full-journey persistence
+`feature/student-auth-persistence-ollama-integration` restores the Gemma Career Assistant at `/career-assistant` and adds pseudonymous login at `/auth` with local SQLite storage of completed student journeys. It requires FastAPI on localhost:8000 and React on localhost:5173; `COOKIE_SECURE=1` is needed with HTTPS for production-style cookies. See `FULL_STACK_AUTH_AUDIT_REVIEW.md` for test commands, expected behaviors, and unresolved privacy/security caveats. Do not use this hackathon prototype as a public student-data service without security review and additional protections.

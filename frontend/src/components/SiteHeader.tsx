@@ -1,9 +1,11 @@
 
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useStudentJourney } from "../state/StudentJourney";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const {account,signOut}=useStudentJourney();
   const close = () => setOpen(false);
 
   return (
@@ -42,15 +44,16 @@ export default function SiteHeader() {
             Interest assessment
           </Link>
           <Link to="/discovery-lab" onClick={close}>Discovery Lab</Link>
+          <Link to="/career-assistant" onClick={close}>Career Assistant</Link>
           <Link to="/assessment" onClick={close}>Math assessment</Link>
           <Link to="/scholarships" onClick={close}>
             Scholarships &amp; costs
           </Link>
           <Link to="/change-path" onClick={close}>Change my path</Link>
           <Link to="/dashboard" onClick={close}>Dashboard</Link>
-          <Link className="nav-cta" to="/onboarding" onClick={close}>
+          {account ? <button type="button" className="nav-cta" onClick={()=>{void signOut();close();}}>Sign out ({account.username})</button> : <Link className="nav-cta" to="/auth" onClick={close}>
             Get started <span aria-hidden="true">↗</span>
-          </Link>
+          </Link>}
         </nav>
       </div>
     </header>

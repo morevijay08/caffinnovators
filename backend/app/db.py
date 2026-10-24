@@ -18,6 +18,7 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, expi
 def init_db() -> None:
     """Create tables for the current MVP schema."""
     from app.models.assessment_attempt import AssessmentAttempt
+    from app.models.student import Student, StudentSession, StudentJourney
     Base.metadata.create_all(bind=engine)
 
 def get_db() -> Generator[Session, None, None]:

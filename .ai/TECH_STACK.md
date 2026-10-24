@@ -75,3 +75,6 @@ Verified career-data imports, real scholarships, persistence, authentication, an
 - Default local serving option: Ollama; initial defaults `OLLAMA_BASE_URL=http://localhost:11434` and `GEMMA_MODEL=gemma4:e2b`. Validate the exact tag and available hardware during implementation.
 - Keep model inference server-side. Never expose provider keys or call model endpoints from React.
 - Hosted Gemma inference is an optional fallback only after an explicit team decision. All other application logic remains deterministic; no RAG, embeddings or vector database.
+
+## Approved scope change requested after original MVP (review branch)
+The user explicitly requested pseudonymous student authentication and SQLite persistence beyond the original no-database MVP. In `feature/student-auth-persistence-ollama-integration`, FastAPI + SQLAlchemy + SQLite stores registered accounts, hashed passwords, opaque sessions, completed interest assessments, profiles, selected paths, reflections, latest math result, comparison choices and chat history. No new frontend framework or external identity provider. This does not imply production security approval; refer to `FULL_STACK_AUTH_AUDIT_REVIEW.md`.

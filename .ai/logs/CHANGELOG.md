@@ -83,3 +83,8 @@
 
 ## TASK-013 on task14
 - Added Discovery Lab dataset, API, schema, backend tests, React page/client/types and styles; registered navigation. No packages added.
+
+## Full-stack review branch: student auth and persistence
+- Added student account/session/journey SQLAlchemy models, API/schema, cookie authentication with CSRF origin checks, frontend account flow and persisted state adapter, regression tests.
+- Restored Gemma assistant files/route from task15 fix branch; updated CORS, math/dashboard/discovery/UI copy.
+- No modifications to legacy Streamlit root. Main branch unchanged.

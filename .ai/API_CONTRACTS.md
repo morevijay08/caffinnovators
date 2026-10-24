@@ -150,3 +150,11 @@ The model field must reflect the configured model identifier. Responses should b
 
 ## TASK-013 implemented discovery activities contract (task14)
 GET `/api/v1/discovery-activities` with optional `interest` filter (case-insensitive category, max 40 chars). HTTP 200: `{activities: [{id,title,interest_tags,duration_minutes,materials,instructions,reflection_prompt,illustrative}], total}`. Invalid oversized filters return HTTP 422. Student reflections remain only in frontend React component memory; no POST or server persistence. This branch-local addition requires normal team review.
+
+## Post-MVP authenticated student contract (review branch)
+- `POST /api/v1/auth/register` and `POST /api/v1/auth/login`: `{username,password}` with 3–40 alphanumeric/underscore username and 10–128 character password. Successful authentication sets a 7-day HttpOnly, SameSite=Lax session cookie. Register is 201; login 200; duplicate username 409; bad password 401.
+- `GET /api/v1/auth/me`: `{id,username}`, cookie required.
+- `POST /api/v1/auth/logout`: 204, invalidates current session token and clears cookie.
+- `GET /api/v1/journey`: cookie required; returns `{profile, assessment, selectedCareerId, pathHistory, reflections, chatHistory, mathResult, comparison}`.
+- `PATCH /api/v1/journey`: cookie required; accepts `{field,value}`, exactly one allowed key from the journey record, returns the full updated record. Invalid data 422, unauthorized 401, blocked cross-origin writes 403.
+- The old anonymous math-attempt lookup remains; privacy hardening/migrations are outstanding before public deployment. This is an explicitly requested change to the former no-auth/no-database MVP design, for team review before merging.

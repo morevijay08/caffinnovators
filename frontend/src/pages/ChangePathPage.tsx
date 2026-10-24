@@ -48,14 +48,14 @@ export default function ChangePathPage() {
       {choice&&choice===selectedCareerId&&<p role="status">This is already your selected path.</p>}
       {choice&&choice!==selectedCareerId&&!confirming&&<button type="button" className="btn btn-primary" onClick={()=>setConfirming(true)}>Review path change →</button>}
       {confirming&&next&&<div className="path-confirm" role="group" aria-label="Confirm change of career path">
-        <h3>Switch to {next.title}?</h3><p>We’ll update only your selected career path. Your onboarding answers, completed assessment and previous path choices will remain available during this app session.</p>
+        <h3>Switch to {next.title}?</h3><p>We’ll update only your selected career path. Your onboarding answers, completed assessment and previous path choices will remain saved to your student account.</p>
         <div className="path-actions"><button type="button" className="btn btn-primary" onClick={apply}>Yes, change my path</button><button type="button" className="btn btn-secondary" onClick={()=>setConfirming(false)}>Cancel</button></div>
       </div>}</>}
       {notice&&<p className="path-success" role="status">{notice}</p>}
     </section>
     {selectedCareerId&&<p><Link className="btn btn-secondary" to={`/careers/${selectedCareerId}`}>View my selected career ↗</Link></p>}
     {pathHistory.length>0&&<section className="path-history"><h2>Your path journey</h2><ol>{pathHistory.map((entry,index)=><li key={index}>{careers.find(c=>c.id===entry.careerId)?.title??entry.careerId} <small>({new Date(entry.changedAt).toLocaleString()})</small></li>)}</ol></section>}
-    <p className="path-note">Your choices are temporary and disappear on page refresh. Changing a path does not erase your progress during this session or guarantee a career outcome.</p>
+    <p className="path-note">Your choices are saved to your student account and restored after refresh. Changing a path does not erase your progress during this session or guarantee a career outcome.</p>
     <div className="path-links"><Link to="/onboarding">Edit onboarding →</Link><Link to="/interest-assessment">Interest assessment →</Link><Link to="/careers">Browse all careers →</Link></div>
   </div></main>;
 }
