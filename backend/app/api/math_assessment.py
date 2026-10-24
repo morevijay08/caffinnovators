@@ -1,4 +1,6 @@
-"""FastAPI routes for math readiness assessment and anonymous attempt history."""
+
+"""FastAPI routes for math readiness and anonymous attempt history."""
+
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -32,7 +34,7 @@ def submit_math_assessment(
     payload: MathAssessmentSubmitRequest,
     db: Session = Depends(get_db),
 ) -> MathAssessmentResult:
-    """Score answers on the server, then persist the non-identifying result snapshot."""
+    """Score answers on the server and persist the result snapshot."""
     try:
         result = score_submission(payload)
     except AssessmentSubmissionError as exc:
@@ -60,6 +62,11 @@ def read_assessment_attempt(
             status_code=503,
             detail="Assessment history is temporarily unavailable.",
         ) from exc
+
     if result is None:
-        raise HTTPException(status_code=404, detail="Assessment attempt not found.")
+        raise HTTPException(
+            status_code=404,
+            detail="Assessment attempt not found.",
+        )
+
     return result
