@@ -24,3 +24,11 @@
 - Added API_CONTRACTS.md with the health-check contract, initial shared data shapes, planned endpoint inventory and contract ownership.
 - TASK-002 now describes the first runtime milestone: React + TypeScript/Vite frontend, FastAPI backend, local CORS/API connection and documented run commands.
 - No runtime code, package installation, application launch or tests were performed as part of this documentation update.
+
+
+## 2026-10-24 — User-approved Gemma 4 runtime chatbot
+- User clarified that Gemma 4 must power the student-facing chatbot inside LifePath India, not merely serve as the team's coding assistant.
+- Updated architecture decision, approved stack, architecture, AI instructions, project context, API contract, team workflow, roadmap and member task ownership.
+- TASK-014 now specifies a real Gemma 4-backed Career Assistant behind FastAPI; local Ollama is the default inference path and hosted inference requires an explicit team decision.
+- Deterministic interest scoring, career matching and maths assessment logic remain non-LLM services.
+- Documentation only: runtime model adapter, chatbot UI, dependency installation and tests have not yet been implemented or verified.
