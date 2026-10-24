@@ -88,3 +88,8 @@
 ## TASK-019 (task11) documentation
 - Rewrote README for React + FastAPI instead of obsolete Streamlit-only skeleton; included realistic feature and API inventory, setup, architecture, test commands and missing integrations.
 - Requires user's local command validation and team review before marking complete.
+
+## TASK-020 — Demo readiness on task12
+- Wrote staged five-minute student-journey demonstration and judge Q&A based only on implemented task-series screens.
+- Added final verification checklist for pytest, TypeScript build, browser walkthrough, accessibility/error states, teammate review and merge readiness.
+- Actual tests, Member 2/3 signoffs and shared release integration remain pending.
