@@ -190,3 +190,7 @@ app.py, pages/, ...          Legacy Streamlit prototype (not active UI)
 TASK-019 documentation was authored on `task11` based on `task10`. The source of truth for task scope, ownership, contracts and integration is under `.ai/`. Members 1/2/3 should review feature acceptance and PRs before shared-branch merges. Refer to `TASK_019_REVIEW.md` for this documentation's checklist.
 
 **Every Interest Has a Future.** Career direction is exploratory, not predetermined.
+
+
+## TASK-008 — Illustrative career roadmaps on `task13`
+The current Member 2 task branch `task13` adds `GET /api/v1/careers/{career_id}/roadmap`. All twelve existing career profiles now have four illustrative year-labelled stages, activities and examples of portfolio milestones. The route uses the same catalogue IDs and is shown on `/careers/:careerId`. These stages are not official education or admission requirements. For local testing use `TASK_008_REVIEW.md`. This branch updates the earlier README limitation that roadmaps were not yet implemented; other pending math, affordability and Gemma modules remain unintegrated.
