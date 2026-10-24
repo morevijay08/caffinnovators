@@ -9,6 +9,7 @@ import CareerDetailPage from "./pages/CareerDetailPage";
 import ChangePathPage from "./pages/ChangePathPage";
 import DashboardPage from "./pages/DashboardPage";
 import MathAssessmentPage from "./pages/MathAssessmentPage";
+import ScholarshipsPage from "./pages/ScholarshipsPage";
 import { StudentJourneyProvider } from "./state/StudentJourney";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
     <Route path="/change-path" element={<ChangePathPage />} />
     <Route path="/dashboard" element={<DashboardPage />} />
     <Route path="/assessment" element={<MathAssessmentPage />} />
+    <Route path="/scholarships" element={<ScholarshipsPage />} />
     <Route path="*" element={<main className="container not-found"><h1>That path isn't here yet.</h1><p>Let's get you back on track.</p><Link className="btn btn-primary" to="/">Return home ↗</Link></main>} />
   </Routes><SiteFooter /></StudentJourneyProvider>;
 }
