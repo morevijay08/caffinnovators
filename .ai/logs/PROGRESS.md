@@ -84,3 +84,7 @@
 - Added three in-process FastAPI cross-feature smoke checks: happy-path student journey, invalid inputs, catalogue filtering/detail consistency.
 - Documented manual React/browser checks, frontend build and readiness dependency gate in TASK_018_REVIEW.md.
 - No claims of successful test execution; user to run local verification.
+
+## TASK-019 (task11) documentation
+- Rewrote README for React + FastAPI instead of obsolete Streamlit-only skeleton; included realistic feature and API inventory, setup, architecture, test commands and missing integrations.
+- Requires user's local command validation and team review before marking complete.
