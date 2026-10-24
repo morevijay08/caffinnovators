@@ -91,3 +91,10 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 ## TASK-013 — Member 2 Discovery Lab (task14)
 - Added six illustrative activities, typed GET /api/v1/discovery-activities with interest filter, React /discovery-lab page and temporary reflection state. See TASK_013_REVIEW.md.
 - Four backend tests added; local execution and browser build unverified. No database, aptitude diagnosis or score; no shared merge.
+
+## 2026-10-25 full-stack auth and Ollama review branch
+- Branch: `feature/student-auth-persistence-ollama-integration` based on `main`, not merged.
+- Restored Career Assistant UI and FastAPI Ollama adapter from `fix/task15-ollama-timeout` and registered their routes in the combined frontend/backend.
+- Added pseudonymous account creation/login/logout with salted PBKDF2 password hashing, opaque sessions, same-origin mutation checks and SQLite-backed journey state.
+- New account-held progress: onboarding, interest assessment, career selection/history, reflections, latest math result, dashboard comparison, bounded chat history. Auth, API and UI state all require local validation.
+- No claim of exhaustive bug-freeness or production security: outstanding privacy/rate-limiting, local pytest/frontend build, Gemma runtime check. See `FULL_STACK_AUTH_AUDIT_REVIEW.md`.
