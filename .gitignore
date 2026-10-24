@@ -8,3 +8,8 @@ venv/
 !.env.example
 .streamlit/secrets.toml
 .DS_Store
+# Never commit student account databases or local SQLite journals.
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
