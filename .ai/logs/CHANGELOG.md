@@ -83,3 +83,7 @@
 
 ## TASK-013 on task14
 - Added Discovery Lab dataset, API, schema, backend tests, React page/client/types and styles; registered navigation. No packages added.
+
+## TASK-014 (task15)
+- Added backend career-assistant schema, service, API router and mocked pytest cases; frontend chat client/types/page/CSS and navigation; review notes and updated contract.
+- No new dependencies or persistent storage.
