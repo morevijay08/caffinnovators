@@ -4,6 +4,8 @@ import SiteFooter from "./components/SiteFooter";
 import HomePage from "./pages/HomePage";
 import OnboardingPage from "./pages/OnboardingPage";
 import InterestAssessmentPage from "./pages/InterestAssessmentPage";
+import CareerExplorerPage from "./pages/CareerExplorerPage";
+import CareerDetailPage from "./pages/CareerDetailPage";
 import { StudentJourneyProvider } from "./state/StudentJourney";
 
 export default function App() {
@@ -11,6 +13,8 @@ export default function App() {
     <Route path="/" element={<HomePage />} />
     <Route path="/onboarding" element={<OnboardingPage />} />
     <Route path="/interest-assessment" element={<InterestAssessmentPage />} />
+    <Route path="/careers" element={<CareerExplorerPage />} />
+    <Route path="/careers/:careerId" element={<CareerDetailPage />} />
     <Route path="*" element={<main className="container not-found"><h1>That path isn't here yet.</h1><p>Let's get you back on track.</p><Link className="btn btn-primary" to="/">Return home ↗</Link></main>} />
   </Routes><SiteFooter /></StudentJourneyProvider>;
 }
