@@ -68,3 +68,9 @@
 - Built React dashboard with onboarding and interest progress, selected career and session-only progress summary.
 - Implemented comparison selection capped at three catalogue careers, with matching skill/interest fields and career links.
 - TASK-010 readiness data not integrated; dashboard labels this honestly. Tests and browser review pending.
+
+## 2026-10-25 — Backend test failures reported from task8
+- User ran `python -m pytest -q` in backend: **16 passed, 2 failed, 1 warning**.
+- Root causes: outdated TASK-002 health test incorrectly expects implemented career route to be 404; TASK-006 search test uses `ROBOTS` while catalogue substring search has `robotics` (case-insensitivity is not the problem).
+- Added two test-only corrections on `fix/task8-backend-tests`: career endpoint asserts 200 and nonempty catalogue; search fixture uses `ROBOT` (mixed case-insensitive partial matching). No runtime services or API contracts were changed.
+- User should rerun pytest on the fix branch. This commit has not been executed in their local environment; green status remains unverified.
