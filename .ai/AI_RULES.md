@@ -4,7 +4,7 @@
 - Gemma 4 is the preferred coding assistant for this repository whenever available.
 - Give the model the required `.ai/` instructions, member role, assigned task, allowed files, dependencies, API contracts, and acceptance criteria before asking it to edit.
 - If Gemma 4 is not available in the current environment, disclose that; do not claim another model is Gemma 4.
-- Gemma 4 is for development assistance only. It must not become an app dependency or call an external model at runtime unless the user explicitly approves a separate integration task.
+- Gemma 4 has two separate roles: optional development coding assistant and approved student-facing runtime model for TASK-014. Runtime integration must use the backend Gemma adapter and documented API contract.
 - Never provide secrets or private student data to an AI model.
 
 ## Before coding
@@ -29,7 +29,7 @@
 - Keep Python domain logic pure/testable where practical; keep FastAPI route handlers thin.
 - Validate API requests/responses with Pydantic and keep TypeScript API types aligned with `.ai/API_CONTRACTS.md`.
 - Use a single frontend API client and configured API base URL.
-- No database, API keys, or runtime network requirements beyond the local frontend-to-backend connection.
+- No database. The approved chatbot may call local Ollama from FastAPI. Never call the model from React. Hosted inference is allowed only if explicitly chosen, with credentials held server-side in untracked environment variables.
 - Preserve responsive design and reduced-motion/accessibility support.
 
 ## Student privacy and safety
@@ -37,7 +37,7 @@
 - Never use sensitive characteristics to restrict career recommendations.
 - Do not shame students or present a short quiz as a diagnosis.
 - Explain recommendation evidence and uncertainty.
-- Label sample data, estimates and simulations clearly.
+- Label sample data, estimates and simulations clearly. Career Assistant answers are AI-generated guidance, not official advice; do not present generated claims about live scholarships, fees, salaries, eligibility or admissions as verified.
 
 ## Verification
 Add/update tests for meaningful logic, run relevant tests/build/API checks, report exact commands and outcomes, and update current state/progress/changelog. Each PR must state scope, changed files, tests run, and known limitations.
