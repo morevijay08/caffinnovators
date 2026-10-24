@@ -7,7 +7,7 @@ import {useStudentJourney} from "../state/StudentJourney";
 type Phase = "loading" | "intro" | "quiz" | "submitting" | "result" | "error";
 
 export default function MathAssessmentPage() {
-  const {saveMathResult,mathResult}=useStudentJourney();
+  const {saveMathResult}=useStudentJourney();
   const [params] = useSearchParams();
   const attemptParam = params.get("attempt");
   const [phase, setPhase] = useState<Phase>("loading");
