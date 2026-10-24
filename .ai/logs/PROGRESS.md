@@ -101,3 +101,7 @@
 
 ## TASK-013 on task14
 - Discovery Lab API and React reflection workflow implemented with six illustrative activity prompts and category filtering. Local tests/browser review pending.
+
+## Full-stack review branch — auth, persisted journey, restored Ollama page
+- Added student signup/login with account-isolated SQLite journey persistence; restored separate-task Gemma assistant in app navigation; updated selected component UI and tests.
+- Known unresolved items and manual verification steps in FULL_STACK_AUTH_AUDIT_REVIEW.md. No shared merge.
