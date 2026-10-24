@@ -63,3 +63,8 @@
 - Added catalogue-backed path selection, explicit confirmation and current choice/history UI.
 - Shared React context now retains onboarding and completed interest assessment throughout in-app career switching.
 - Browser and build checks are pending local user review. No other members' backend services were changed.
+
+## TASK-012 (task8): Student Dashboard / comparison
+- Built React dashboard with onboarding and interest progress, selected career and session-only progress summary.
+- Implemented comparison selection capped at three catalogue careers, with matching skill/interest fields and career links.
+- TASK-010 readiness data not integrated; dashboard labels this honestly. Tests and browser review pending.
