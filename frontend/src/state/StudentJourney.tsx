@@ -9,6 +9,7 @@ export type StudentGoal=(typeof GOAL_OPTIONS)[number];
 export type StudentProfile=NonNullable<SavedStudentJourney["profile"]>;
 export type PathChange={careerId:string;changedAt:string};
 export type Assessment=SavedStudentJourney["assessment"];
+export type MathResult=SavedStudentJourney["mathResult"];
 export interface JourneyState {
  account:StudentIdentity|null; authLoading:boolean; saveError:string;
  signIn(username:string,password:string):Promise<void>;
@@ -19,9 +20,11 @@ export interface JourneyState {
  selectedCareerId:string|null;pathHistory:PathChange[];changePath(id:string):void;
  reflections:Record<string,string>;saveReflection(id:string,text:string):void;
  chatHistory:{role:"user"|"assistant";content:string}[];setChatHistory(messages:{role:"user"|"assistant";content:string}[]):void;
+ mathResult:MathResult; saveMathResult(result:NonNullable<MathResult>):void;
+ comparison:string[];setComparison(ids:string[]):void;
 }
 const Context=createContext<JourneyState|undefined>(undefined);
-const empty:SavedStudentJourney={profile:null,assessment:null,selectedCareerId:null,pathHistory:[],reflections:{},chatHistory:[]};
+const empty:SavedStudentJourney={profile:null,assessment:null,selectedCareerId:null,pathHistory:[],reflections:{},chatHistory:[],mathResult:null,comparison:[]};
 export function StudentJourneyProvider({children}:{children:ReactNode}){
  const [account,setAccount]=useState<StudentIdentity|null>(null);
  const [authLoading,setAuthLoading]=useState(true);
@@ -43,13 +46,15 @@ export function StudentJourneyProvider({children}:{children:ReactNode}){
  signIn:(u,p)=>authenticated(()=>loginAccount(u,p)),
  signUp:(u,p)=>authenticated(()=>registerAccount(u,p)),signOut,
  profile:data.profile,assessment:data.assessment,selectedCareerId:data.selectedCareerId,pathHistory:data.pathHistory,
- reflections:data.reflections,chatHistory:data.chatHistory,
+ reflections:data.reflections,chatHistory:data.chatHistory,mathResult:data.mathResult,comparison:data.comparison,
  setProfile:p=>update("profile",{...p,interests:[...p.interests],favoriteSubjects:[...p.favoriteSubjects]}),
  clearProfile:()=>update("profile",null),
  saveAssessment:a=>update("assessment",{answers:a.answers.map(x=>({...x})),signals:a.signals.map(x=>({...x}))}),
  changePath:id=>{if(id===live.current.selectedCareerId)return;const history=[...live.current.pathHistory,{careerId:id,changedAt:new Date().toISOString()}];setData(old=>({...old,selectedCareerId:id,pathHistory:history}));save("selectedCareerId",id);save("pathHistory",history);},
  saveReflection:(id,text)=>{const next={...live.current.reflections,[id]:text};update("reflections",next);},
- setChatHistory:messages=>update("chatHistory",messages.slice(-20))
+ setChatHistory:messages=>update("chatHistory",messages.slice(-20)),
+ saveMathResult:result=>update("mathResult",result),
+ setComparison:ids=>update("comparison",ids.slice(0,3))
  }),[account,authLoading,saveError,data]);
  return <Context.Provider value={value}>{children}{saveError&&<div role="alert" style={{position:"fixed",bottom:12,right:12,padding:14,background:"#fff1f1",color:"#831b1b",border:"1px solid #d88",zIndex:1000,maxWidth:340}}>Progress not saved: {saveError}</div>}</Context.Provider>;
 }
