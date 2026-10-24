@@ -43,7 +43,9 @@ class TopicScore(BaseModel):
     percentage: int
 
 
+
 class MathAssessmentResult(BaseModel):
+    attempt_id: str | None = None
     assessment_id: str
     total_questions: int
     answered_questions: int

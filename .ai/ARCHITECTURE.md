@@ -31,11 +31,12 @@ Inspect the repository before creating folders; these are intended conventions, 
 - Configure CORS only for the local frontend origin needed in development; do not use wildcard origins with credentials.
 - Return useful, consistent error responses; validate requests at the API boundary.
 - Keep career/scoring logic in services, not in React components or route handlers.
-- No database is required. Default chatbot inference is local through Ollama. If hosted inference is deliberately selected, its API key stays server-side in an untracked environment file.
+- SQLite via SQLAlchemy persists anonymous math-assessment result snapshots only. It does not store student accounts or answer-by-answer personal histories. Default chatbot inference is local through Ollama. If hosted inference is deliberately selected, its API key stays server-side in an untracked environment file.
 
 ## State and privacy
 - The frontend may keep temporary UI state in React state/context; use only as much shared state as required.
-- Assessment results and selected career may be kept in browser memory for the demo, with limitations stated clearly. Do not claim refresh-safe or durable persistence unless implemented and verified.
+- Math-assessment results are persisted in SQLite as anonymous attempts; each attempt has a generated UUID and is not authentication.
+- Other assessment results and selected careers may remain temporary browser state until their owners implement persistence.
 - Backend must not pretend to provide user accounts or durable profiles.
 - Use fictional demo data and avoid unnecessary personal/sensitive information.
 

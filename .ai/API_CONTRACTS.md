@@ -12,7 +12,7 @@ Status: Initial contract baseline approved for implementation planning. Endpoint
 - Frontend components call the shared client under `frontend/src/api/`; do not scatter raw `fetch()` calls or hardcoded base URLs throughout components.
 - Configure the API base URL through one frontend environment setting (for Vite, a `VITE_API_BASE_URL` variable). Provide a safe local default only if the team agrees it is useful.
 - Backend local CORS should allow only the configured local frontend origin, not all origins with credentials.
-- No authentication, database or persistent student profiles in the MVP. TASK-014 is the approved runtime-AI exception: FastAPI calls Gemma 4 through local Ollama by default; any hosted-provider key stays server-side and untracked.
+- No authentication or student profiles in the MVP. Approved exception: SQLite persists anonymous math-assessment result snapshots only, owned by Member 3 under TASK-009A. SQLAlchemy is used for SQLite access. TASK-014 is the runtime-AI exception: FastAPI calls Gemma 4 through local Ollama by default; any hosted-provider key stays server-side and untracked.
 - All content that is not verified real-world information must be marked illustrative/demo.
 - Use consistent HTTP status codes and an error response with a human-readable detail. Do not leak stack traces or secrets.
 
@@ -85,7 +85,8 @@ The endpoints below are a roadmap, not a claim they exist yet. Keep routes thin 
 | GET | `/api/v1/interest-assessment` | Member 2 | Return interest questions/options without answer keys |
 | POST | `/api/v1/interest-assessment/submit` | Member 2 | Score answers and return explanations/recommendations |
 | GET | `/api/v1/math-assessment` | Member 3 | Return question IDs, prompts, options and topic tags without answer keys |
-| POST | `/api/v1/math-assessment/submit` | Member 3 | Score submitted answers and return topic-level analysis |
+| POST | `/api/v1/math-assessment/submit` | Member 3 | Score answers, persist anonymous result snapshot, and return topic-level analysis plus `attempt_id` |
+| GET | `/api/v1/math-assessment/attempts/{attempt_id}` | Member 3 | Retrieve a saved result snapshot by attempt UUID; UUID is not authentication |
 | GET | `/api/v1/discovery-activities` | Member 2 | List Interest Discovery Lab activities |
 | POST | `/api/v1/career-assistant` | Member 2 | Gemma 4-generated career guidance; server-side model call with safe error handling |
 | GET | `/api/v1/affordability-examples` | Member 3 | Fictional affordability/scholarship examples clearly labelled as demo |
@@ -141,3 +142,30 @@ The model field must reflect the configured model identifier. Responses should b
 - Member 2: system prompt, backend route, model adapter, request/response schemas and assistant behavior tests.
 - Member 1: chat UI, loading/error states, typed client and API integration.
 - Member 3: coordinate failure-path tests (runtime unavailable, timeout, invalid/empty output) and regression checks.
+
+
+## 7. Approved SQLite anonymous-attempt persistence (TASK-009A)
+
+### Ownership
+Member 3 owns all database tasks for this feature: SQLAlchemy setup, SQLite connection/session lifecycle, attempt model, repository/persistence service, schema initialization/evolution, result retrieval endpoint, `.ai/` database documentation and database-specific tests. No other member should edit these files without coordination with Member 3.
+
+### Storage scope
+- Store only the server-calculated result summary: generated attempt UUID, assessment version, total/answered/correct counts, percentage, elapsed seconds, timeout flag, topic-breakdown snapshot, and server-generated UTC creation timestamp.
+- Do not store student names, school, marks, account details, or individual answer choices in this task.
+- Keep the math question bank and correct answer keys in Python source. Keep the local database file out of Git.
+- Use SQLAlchemy with SQLite. `DATABASE_URL` may override the default local database URL; sessions must close reliably and tests must use an isolated temporary database.
+
+### Submission response
+`POST /api/v1/math-assessment/submit` keeps existing result fields and adds `attempt_id` (UUID string) after the result is successfully persisted. If persistence fails, do not return a false success.
+
+### Retrieve saved attempt
+`GET /api/v1/math-assessment/attempts/{attempt_id}` returns the saved result summary including the same `attempt_id`; unknown IDs return HTTP 404 with a safe `detail`. The identifier is opaque, not authentication. No cross-user access control is implied; this endpoint returns only the non-identifying summary described above.
+
+### Acceptance tests
+- Existing scoring and health tests remain passing.
+- Successful POST saves exactly one record and returns an attempt ID.
+- GET returns the saved result and topic breakdown; unknown ID returns 404.
+- Invalid/duplicate/unknown submissions do not create records.
+- A saved result remains after closing/reopening the database connection/application against the same file.
+- Tests use temporary SQLite files and do not touch the developer database.
+- Database errors fail safely without leaking SQL, file paths, or stack traces.

@@ -35,6 +35,7 @@ This mapping allocates roadmap tasks; it does not mark them complete or authoriz
 | Task | Work | Dependency / handoff |
 |---|---|---|
 | TASK-009 | Timed Math Readiness Assessment service/API with topic tags | Depends on TASK-002 and agreed assessment contract |
+| TASK-009A | SQLite persistence for anonymous math-assessment attempts: SQLAlchemy setup, DB session/config, attempt model, repository, save/retrieve API, `.ai/` contract updates and database tests | Owned end-to-end by Member 3; depends on TASK-009 API and approved architecture; no auth/student profiles |
 | TASK-010 | Topic analysis, improvement plan, checklist and retest service/API | Depends on TASK-009; publish result schema for frontend dashboard |
 | TASK-015 | Fictional scholarship/affordability demo content and API/data integration as needed | Depends on TASK-002 and agreed fictional-data schema; no real-time eligibility claims |
 | TASK-017 | Coordinate frontend/backend test coverage and API contract checks | Feature owners write tests for their own logic; Member 3 checks coverage gaps and runs combined suites |
@@ -43,7 +44,7 @@ This mapping allocates roadmap tasks; it does not mark them complete or authoriz
 - Each member writes and runs tests for their own logic.
 - Member 1 coordinates frontend and cross-stack integration.
 - Member 2 owns career/interest service contracts and data schemas.
-- Member 3 owns readiness service contracts, scoring and test-suite coordination.
+- Member 3 owns readiness service contracts, scoring, SQLite database implementation for anonymous math-assessment attempts (TASK-009A), and test-suite coordination.
 - All members review student safety, fictional-data labels, accessibility, and API/UI error states.
 - Do not mark a task DONE until acceptance criteria and relevant tests are verified.
 
@@ -56,3 +57,7 @@ This mapping allocates roadmap tasks; it does not mark them complete or authoriz
 6. **Release:** All members support TASK-018; Member 1 coordinates TASK-019/020. Promote stable work to `main` only after builds, API checks and end-to-end tests.
 
 If a dependency or API contract is missing, work on another authorized independent task or ask the coordinator; do not invent an incompatible interface.
+
+
+## Member 3 ownership addendum — TASK-009A
+Member 3 owns every database task in this scope: database configuration, SQLAlchemy/SQLite integration, schema/model, persistence/repository layer, result save/retrieve endpoints, database-specific `.ai/` documentation, and database tests. Member 1 may integrate the frontend against the agreed API contract but must coordinate before changing persistence files or contract fields. Member 2 does not need to implement database code for this task.
