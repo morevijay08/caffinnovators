@@ -68,3 +68,8 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - Added reusable accessible FeedbackState loading/error/empty component, career catalogue error/empty/loading feedback, interest question reload retry, career recommendation error/empty feedback and updated onboarding summary copy.
 - No new endpoints, dependencies, persistence, readiness data or Gemma integration. Review: `TASK_016_REVIEW.md`.
 - User previously indicated the backend test fix was done; exact rerun stdout was not supplied. npm build, pytest and browser regression on task9 are unverified until the user tests.
+
+## TASK-018 (task10) — cross-feature smoke testing
+- Added `backend/tests/test_integration_smoke.py` covering the existing health → interest quiz → recommendations → catalogue details journey, plus safe errors and filters.
+- Added `TASK_018_REVIEW.md` with browser validation steps and team handoff. `task10` is based on `task9` and preserves previous backend test corrections.
+- The TASK-010 math analysis contract is still not integrated into this task series, so **full all-member end-to-end verification remains incomplete**. Actual local pytest/build/browser test results remain pending.
