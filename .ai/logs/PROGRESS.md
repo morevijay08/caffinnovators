@@ -79,3 +79,8 @@
 - Implemented reusable React status/alert feedback with recovery actions and accessibility semantics.
 - Wired loading/empty/error states into Career Explorer, assessment question fetch, and career recommendations; updated obsolete onboarding completion message.
 - Based on reviewed fix/task8-backend-tests branch; no Python logic changes. Local verification outstanding.
+
+## TASK-018 — integration smoke tests on task10
+- Added three in-process FastAPI cross-feature smoke checks: happy-path student journey, invalid inputs, catalogue filtering/detail consistency.
+- Documented manual React/browser checks, frontend build and readiness dependency gate in TASK_018_REVIEW.md.
+- No claims of successful test execution; user to run local verification.
