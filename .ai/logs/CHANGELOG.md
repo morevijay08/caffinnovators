@@ -69,3 +69,6 @@
 ## TASK-018 (task10)
 - New backend/tests/test_integration_smoke.py exercises integrated TASK-002/005/006/007 APIs without changing feature logic.
 - Added TASK_018_REVIEW.md and tracked remaining missing all-member TASK-010 integration.
+
+## TASK-019 (task11)
+- Updated README.md and created TASK_019_REVIEW.md. Documentation only; no functional features or package updates.
