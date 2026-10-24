@@ -53,7 +53,7 @@ export default function InterestAssessmentPage() {
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Unable to submit answers."); }
     finally { setSubmitting(false); }
   }
-  function reset() { setAnswers({}); setIndex(0); setTimeLeft(questions?.duration_seconds ?? 0); setExpired(false); setError(""); setResult(null); setSubmittedAnswers([]); }
+  function reset() { setAnswers({}); setIndex(0); setTimeLeft(0); setExpired(false); setError(""); setResult(null); setSubmittedAnswers([]); setQuestions(null); setLoadState("loading"); setRequestVersion(version => version + 1); }
   const current = questions?.questions[index];
   return <main className="assessment-page"><div className="assessment-shell">
     <span className="eyebrow">INTEREST DISCOVERY</span><h1>What feels exciting to you?</h1>
@@ -70,7 +70,7 @@ export default function InterestAssessmentPage() {
       {error && <p role="alert" className="assessment-error">{error}</p>}
       <div className="assessment-actions"><button type="button" className="btn btn-secondary" onClick={() => setIndex(i => Math.max(0,i-1))} disabled={index === 0}>← Previous</button>{index < questions.questions.length - 1 ? <button type="button" className="btn btn-primary" onClick={() => {if (!answers[current.id]) {setError("Choose an option to continue.");return;}setError("");setIndex(i=>i+1);}}>Next →</button> : <button type="button" className="btn btn-primary" disabled={submitting} onClick={finish}>{submitting ? "Submitting…" : "See my interest signals ↗"}</button>}</div>
     </section>}
-    {assessment && !result && <p className="assessment-notice">Your previous completed assessment is still saved for this app session. <Link to="/change-path">Change my career path →</Link></p>}
+    {assessment && !result && <p className="assessment-notice">Your previous completed assessment is saved to your student account. <Link to="/change-path">Change my career path →</Link></p>}
     <p className="assessment-small">This is a short illustrative reflection activity, not a psychological test or a prediction of success.</p>
   </div></main>;
 }
