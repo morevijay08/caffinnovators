@@ -56,3 +56,9 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - Extended `StudentJourney` to retain completed TASK-005 assessment answers/signals and TASK-004 profile during client-side navigation; changes of career do not clear these.
 - Connected assessment completion and TASK-007 recommendations to change-path UI; see `TASK_011_REVIEW.md`.
 - No dashboard, database, durable storage or backend feature changes. Committed on GitHub; local build, pytest and browser acceptance still require confirmation. Branch chain task1 → task2 → task3 → task4 → task5 → task6 → task7.
+
+## TASK-012 — Dashboard and three-career comparison (branch task8)
+- Added `/dashboard` React route and navigation, with onboarding/interest/current-career summary from shared StudentJourney memory state.
+- Added up-to-three career comparison against TASK-006 catalogue: summaries, interests, skills and profile links. Loading/error/empty states included.
+- TASK-010 readiness result contract is not yet integrated: no readiness scores fabricated; this acceptance criterion remains pending. See `TASK_012_REVIEW.md`.
+- Branch chain task1 → task2 → task3 → task4 → task5 → task6 → task7 → task8. GitHub file commits confirmed, local build/pytest/browser testing pending. No shared branch merge performed.
