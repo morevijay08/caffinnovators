@@ -13,7 +13,13 @@ export interface StudentProfile {
   goal: StudentGoal;
   careerIdea: string;
 }
+export interface PathChange { careerId: string; changedAt: string }
 export interface JourneyState {
+  assessment: { answers: {question_id:string;option_id:string}[]; signals: {interest:string;score:number;evidence:string}[] } | null;
+  saveAssessment(data: {answers:{question_id:string;option_id:string}[];signals:{interest:string;score:number;evidence:string}[]}): void;
+  selectedCareerId: string | null;
+  pathHistory: PathChange[];
+  changePath(careerId: string): void;
   profile: StudentProfile | null;
   setProfile(profile: StudentProfile): void;
   clearProfile(): void;
@@ -22,15 +28,20 @@ const JourneyContext = createContext<JourneyState | undefined>(undefined);
 
 export function StudentJourneyProvider({ children }: { children: ReactNode }) {
   const [profile, updateProfile] = useState<StudentProfile | null>(null);
+  const [assessment, setAssessment] = useState<JourneyState["assessment"]>(null);
+  const [selectedCareerId, setSelectedCareerId] = useState<string | null>(null);
+  const [pathHistory, setPathHistory] = useState<PathChange[]>([]);
   const value = useMemo<JourneyState>(() => ({
-    profile,
+    profile, assessment, selectedCareerId, pathHistory,
+    saveAssessment: data => setAssessment({ answers: data.answers.map(a => ({...a})), signals: data.signals.map(x => ({...x})) }),
+    changePath: careerId => { if (careerId !== selectedCareerId) { setSelectedCareerId(careerId); setPathHistory(old => [...old, {careerId, changedAt:new Date().toISOString()}]); } },
     setProfile: (next) => updateProfile({
       ...next,
       interests: [...next.interests],
       favoriteSubjects: [...next.favoriteSubjects],
     }),
     clearProfile: () => updateProfile(null),
-  }), [profile]);
+  }), [profile, assessment, selectedCareerId, pathHistory]);
   return <JourneyContext.Provider value={value}>{children}</JourneyContext.Provider>;
 }
 export function useStudentJourney(): JourneyState {
