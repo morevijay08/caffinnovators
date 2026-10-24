@@ -51,4 +51,4 @@ async def ask_gemma(message: str, history: list[dict[str, str]]) -> dict[str, st
     answer = body["message"].get("content")
     if not isinstance(answer, str) or not answer.strip():
         raise ModelInvalidResponse()
-    return {"answer": answer.strip()[:4000], "model": model, "disclaimer": DISCLAIMER}
+    return {"answer": answer.strip()[:2000], "model": model, "disclaimer": DISCLAIMER}
