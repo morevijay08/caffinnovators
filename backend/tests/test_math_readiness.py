@@ -1,7 +1,7 @@
 """Tests for TASK-009 math assessment data, privacy boundary and scoring."""
-from backend.app.data.math_questions import DURATION_SECONDS, QUESTION_BANK
-from backend.app.schemas.math_readiness import MathAssessmentSubmitRequest
-from backend.app.services.math_readiness import (
+from app.data.math_questions import DURATION_SECONDS, QUESTION_BANK
+from app.schemas.math_readiness import MathAssessmentSubmitRequest
+from app.services.math_readiness import (
     AssessmentSubmissionError,
     get_public_assessment,
     score_submission,

@@ -1,12 +1,12 @@
 """FastAPI router for the math readiness assessment (TASK-009)."""
 from fastapi import APIRouter, HTTPException
 
-from backend.app.schemas.math_readiness import (
+from app.schemas.math_readiness import (
     MathAssessmentPublic,
     MathAssessmentResult,
     MathAssessmentSubmitRequest,
 )
-from backend.app.services.math_readiness import (
+from app.services.math_readiness import (
     AssessmentSubmissionError,
     get_public_assessment,
     score_submission,

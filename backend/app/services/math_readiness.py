@@ -1,8 +1,8 @@
 """Deterministic math readiness assessment logic; no LLM or persistence required."""
 from collections import defaultdict
 
-from backend.app.data.math_questions import ASSESSMENT_ID, DURATION_SECONDS, QUESTION_BANK
-from backend.app.schemas.math_readiness import (
+from app.data.math_questions import ASSESSMENT_ID, DURATION_SECONDS, QUESTION_BANK
+from app.schemas.math_readiness import (
     MathAssessmentPublic,
     MathAssessmentResult,
     MathOptionPublic,

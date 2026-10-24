@@ -1,6 +1,6 @@
 # TASK-009 — Timed Math Readiness Assessment
 
-Status: IN PROGRESS on `feature/TASK-009-math-readiness`. This branch implements the independent readiness domain module and router; integration into the shared FastAPI app waits for TASK-002's app entry point.
+Status: IMPLEMENTED on `feature/TASK-009-api-integration`. The math readiness router is registered in the shared FastAPI application. API smoke tests and combined backend tests should be verified on the integration branch before this task is marked DONE.
 
 ## Owner
 Member 3 — readiness backend and tests.
@@ -30,10 +30,10 @@ The assessment declares a 600-second time limit. `elapsed_seconds` is client-rep
 - [x] Scoring is deterministic and server-side.
 - [x] Topic-level results are returned.
 - [x] Invalid/unknown/duplicate submissions are rejected.
-- [x] Unit tests pass in an isolated local test copy (6 passed).
-- [ ] Run tests against the actual GitHub branch checkout when network/checkout is available.
-- [ ] Wire router into `backend/app/main.py` after TASK-002 creates the shared FastAPI entry point.
-- [ ] Run FastAPI endpoint smoke tests after integration.
+- [x] Unit tests passed on the original feature branch (6 passed).
+- [x] Router registered in the shared FastAPI application.
+- [ ] Run tests against the actual GitHub branch checkout.
+- [ ] Run FastAPI endpoint smoke tests and combined backend tests on the integration branch.
 - [ ] Review the timing/anti-tampering behavior with the team before claiming secure server-enforced timing.
 
 ## Files
