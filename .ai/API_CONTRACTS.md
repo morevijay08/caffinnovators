@@ -147,3 +147,6 @@ The model field must reflect the configured model identifier. Responses should b
 - Response: `{career_id: string, career_title: string, illustrative: true, duration_years: 4, years: [{year: number, title: string, focus: string, activities: string[], milestone: string}], disclaimer: string}`.
 - The separate `GET /api/v1/careers/{career_id}` contract remains unchanged. Roadmaps are illustrative exploration stages, not validated qualification/education pathways, official admission requirements or fixed student timelines. TypeScript `CareerRoadmap` and Pydantic `CareerRoadmap` follow the same keys.
 - This branch-local contract note requires normal team review before shared integration.
+
+## TASK-013 implemented discovery activities contract (task14)
+GET `/api/v1/discovery-activities` with optional `interest` filter (case-insensitive category, max 40 chars). HTTP 200: `{activities: [{id,title,interest_tags,duration_minutes,materials,instructions,reflection_prompt,illustrative}], total}`. Invalid oversized filters return HTTP 422. Student reflections remain only in frontend React component memory; no POST or server persistence. This branch-local addition requires normal team review.
