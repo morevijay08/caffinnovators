@@ -141,3 +141,9 @@ The model field must reflect the configured model identifier. Responses should b
 - Member 2: system prompt, backend route, model adapter, request/response schemas and assistant behavior tests.
 - Member 1: chat UI, loading/error states, typed client and API integration.
 - Member 3: coordinate failure-path tests (runtime unavailable, timeout, invalid/empty output) and regression checks.
+
+## TASK-008 implemented contract — career year-by-year roadmap (task13)
+- `GET /api/v1/careers/{career_id}/roadmap` — returns HTTP 200 with `CareerRoadmap` for an existing illustrative career; unknown IDs return HTTP 404 with human-readable `detail`.
+- Response: `{career_id: string, career_title: string, illustrative: true, duration_years: 4, years: [{year: number, title: string, focus: string, activities: string[], milestone: string}], disclaimer: string}`.
+- The separate `GET /api/v1/careers/{career_id}` contract remains unchanged. Roadmaps are illustrative exploration stages, not validated qualification/education pathways, official admission requirements or fixed student timelines. TypeScript `CareerRoadmap` and Pydantic `CareerRoadmap` follow the same keys.
+- This branch-local contract note requires normal team review before shared integration.
