@@ -52,3 +52,7 @@
 - Added `backend/app/services/career_recommendations.py`, recommendation API/schema/tests and typed React suggestions component/client.
 - Reused TASK-005 answers and TASK-006 career IDs; no additional third-party packages.
 - Local test verification and shared integration remain pending.
+
+## TASK-011 — Member 1 (task7)
+- Added Change My Path React route, selection/confirmation UI, shared current career and path history state, and assessment-progress preservation.
+- Session-only; no additional dependencies or backend endpoints. Verification pending.
