@@ -38,3 +38,8 @@
 - Correct onboarding URL is `http://localhost:5173/onboarding`; malformed URL containing literal Markdown `**` displayed catch-all 404 and was corrected.
 - Refreshed `.ai/CURRENT_STATE.md` and `.ai/KNOWN_ISSUES.md` to supersede obsolete Streamlit and simulated-assistant descriptions; previous historical entries remain preserved.
 - No new application changes in this documentation-only reconciliation; full build and tests remain to be recorded by a developer.
+
+## 2026-10-25 — TASK-005 interest assessment feature branch
+- `task4` extends `task3` with an illustrative six-question interest assessment.
+- Adds FastAPI GET/POST assessment API, deterministic scoring and unit/API tests; adds typed React assessment view and navigation.
+- No new third-party dependencies, database or Gemma runtime use. Test evidence and integration merge pending.
