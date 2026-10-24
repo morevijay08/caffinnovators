@@ -43,6 +43,8 @@ class ChatMessage(BaseModel):
     role: Literal["user","assistant"]
     content: str = Field(min_length=1, max_length=2000)
 
+from app.schemas.math_readiness import MathAssessmentResult
+
 class JourneyData(BaseModel):
     profile: Profile | None = None
     assessment: Assessment | None = None
@@ -50,6 +52,8 @@ class JourneyData(BaseModel):
     pathHistory: list[PathChange] = Field(default_factory=list, max_length=100)
     reflections: dict[str, str] = Field(default_factory=dict)
     chatHistory: list[ChatMessage] = Field(default_factory=list, max_length=20)
+    mathResult: MathAssessmentResult | None = None
+    comparison: list[str] = Field(default_factory=list, max_length=3)
 
     @field_validator("reflections")
     @classmethod
@@ -60,5 +64,5 @@ class JourneyData(BaseModel):
 
 class JourneyPatch(BaseModel):
     # One change per call prevents accidentally clearing concurrently updated fields.
-    field: Literal["profile","assessment","selectedCareerId","pathHistory","reflections","chatHistory"]
+    field: Literal["profile","assessment","selectedCareerId","pathHistory","reflections","chatHistory","mathResult","comparison"]
     value: object
