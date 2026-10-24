@@ -119,3 +119,7 @@ If a required file is missing or an interface is unclear, report the blocker ins
 - [Task files and template](tasks/)
 - [Progress log](logs/PROGRESS.md)
 - [Changelog](logs/CHANGELOG.md)
+
+
+## User-approved Gemma 4 runtime chatbot
+The Career Assistant must use Gemma 4 at runtime; it is not a simulated/rule-based chatbot and not merely a coding-assistant preference. Default request flow: React chat UI → FastAPI `POST /api/v1/career-assistant` → local Ollama → configurable Gemma 4 model. Initial configuration defaults: `OLLAMA_BASE_URL=http://localhost:11434`, `GEMMA_MODEL=gemma4:e2b`; verify the installed tag before implementation. The browser never calls Ollama directly. Hosted inference is an explicit fallback decision. Interest scoring, career recommendation ranking and math assessment scoring remain deterministic Python services. See ADR-008 and `.ai/tasks/TASK_014_GEMMA_CAREER_ASSISTANT.md`.
