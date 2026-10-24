@@ -11,13 +11,14 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 
-@pytest.fixture(autouse=True, scope="module")
+client = TestClient(app)
+
+
+@pytest.fixture(scope="module", autouse=True)
 def run_app_lifespan():
-    """Initialize the SQLite schema through the app startup lifecycle."""
-    with TestClient(app) as client:
-        globals()["client"] = client
+    """Initialize tables via app startup before math API test requests."""
+    with TestClient(app):
         yield
-    globals().pop("client", None)
 
 
 def _assessment():
