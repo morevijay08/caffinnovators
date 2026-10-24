@@ -2,7 +2,6 @@ import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useStudentJourney } from "../state/StudentJourney";
 import { askCareerAssistant } from "../api/careerAssistant";
-import type { AssistantMessage } from "../types/careerAssistant";
 import "../styles/careerAssistant.css";
 
 export default function CareerAssistantPage() {
@@ -20,7 +19,7 @@ export default function CareerAssistantPage() {
     setError("");
     try {
       const reply = await askCareerAssistant(message, messages.slice(-10));
-      setMessages(previous => [...previous, { role: "user", content: message }, { role: "assistant", content: reply.answer }]);
+      setMessages([...messages, { role: "user", content: message }, { role: "assistant", content: reply.answer }]);
       setDraft("");
       setModel(reply.model);
       setDisclaimer(reply.disclaimer);
