@@ -27,7 +27,7 @@ export default function OnboardingPage() {
   const [draft, setDraft] = useState<Draft>(() => createDraft(profile));
   const [step, setStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [finished, setFinished] = useState(false);
+  const [finished, setFinished] = useState(profile !== null);
   function change(next: Draft) { setDraft(next); setError(null); }
   function next(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,9 +46,9 @@ export default function OnboardingPage() {
   }
   function back() { setStep(s => Math.max(0, s - 1)); setError(null); }
   function restart() { clearProfile(); setDraft(createDraft(null)); setStep(0); setError(null); setFinished(false); }
-  if (finished || profile && !finished && step === 0 && draft.educationLevel === profile.educationLevel) {
+  if (finished) {
     // Saved profile can be edited; on first arrival show its summary instead of hiding it.
-    if (finished || profile) return <main className="onboarding-page"><section className="onboarding-shell completed-panel">
+    return <main className="onboarding-page"><section className="onboarding-shell completed-panel">
       <span className="eyebrow">YOUR EXPLORATION STARTS HERE</span><h1>You're ready to explore.</h1><p>These choices help shape your experience. They never limit your future.</p>
       <dl className="profile-summary">
         <div><dt>Education</dt><dd>{profile?.educationLevel ?? draft.educationLevel}</dd></div>
