@@ -21,3 +21,11 @@
 - Added API_CONTRACTS.md to define the initial health endpoint, API conventions, planned endpoint inventory, shared data shapes and contract ownership.
 - Kept the MVP database-free and independent of paid APIs, secrets and runtime LLM services.
 - Documentation-only update: no runtime code was created, installed, launched or tested.
+
+
+## 2026-10-24 — Gemma 4 approved as student-facing runtime model
+- Superseded the earlier simulated/rule-based Career Assistant decision for TASK-014.
+- Approved Gemma 4 runtime inference behind FastAPI, using local Ollama by default and configurable model/base URL; hosted inference remains an explicit fallback decision.
+- Updated stack, architecture, AI instructions, project context, decisions, current state, team workflow, roadmap, member assignments and API contracts.
+- Added a detailed TASK-014 specification for request/response shape, safe prompt behavior, runtime configuration, failure handling and member ownership.
+- Documentation-only update; no runtime integration or tests are claimed.
