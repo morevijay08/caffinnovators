@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app.api.math_assessment import router as math_assessment_router
+from app.db import init_db
 
 app = FastAPI(title="LifePath India API", version="0.1.0")
 frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
@@ -27,5 +28,10 @@ def health() -> HealthResponse:
     return HealthResponse(status="ok", service="lifepath-api")
 
 
-# Member 3 — TASK-009 math readiness assessment endpoints.
+# Member 3 — TASK-009 math readiness assessment endpoints and SQLite persistence.
+@app.on_event("startup")
+def initialize_database() -> None:
+    init_db()
+
+
 app.include_router(math_assessment_router)
