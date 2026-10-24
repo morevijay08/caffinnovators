@@ -28,7 +28,8 @@ See `.ai/roadmap/MEMBER_TASK_ASSIGNMENTS.md` for task IDs, dependencies and owne
 ## File ownership
 - Member 1 owns `frontend/`, React pages/components, styles/design tokens, routing, frontend API client/types and frontend integration.
 - Member 2 owns career/interest domain services and data under `backend/app/services/` and `backend/app/data/`, plus related schemas/routes assigned to career APIs.
-- Member 3 owns readiness/performance services, math assessment data, readiness schemas/routes and backend tests for readiness logic.
+- Member 3 owns readiness/performance services, math assessment data, readiness schemas/routes, SQLite persistence for anonymous assessment attempts, database configuration/models/repository, and related backend tests.
+- For this approved SQLite change, Member 3 is the sole task owner for all database code, database schema/evolution, persistence endpoints, database documentation, and database-specific tests. Other members must coordinate before touching these files.
 - Member 3 coordinates test coverage; every feature owner writes tests for their own logic.
 - `.ai/API_CONTRACTS.md`, backend entry point/CORS, dependency files, shared frontend types/API client, `.ai/CURRENT_STATE.md` and logs are shared-sensitive; coordinate edits and assign one editor at a time.
 - Do not have two members edit the same file in parallel. Agree changes to a contract before modifying both API and TypeScript types.
@@ -60,7 +61,7 @@ Review all changes. If Gemma 4 is unavailable, disclose it; do not mislabel anot
 - Keep Pydantic schemas and TypeScript types aligned with `.ai/API_CONTRACTS.md`.
 - Configure local CORS for the actual frontend origin only.
 - Use a consistent error format and handle loading, empty and failed requests in the UI.
-- Do not add auth or a database. Gemma 4 inference for TASK-014 is explicitly approved; use local Ollama by default and keep any hosted provider credentials server-side.
+- Do not add authentication or databases beyond the approved SQLite persistence for anonymous math-assessment attempts. Gemma 4 inference for TASK-014 is explicitly approved; use local Ollama by default and keep any hosted provider credentials server-side.
 
 ## Conflict prevention and resolution
 - One owner per file per task; keep PRs small.
