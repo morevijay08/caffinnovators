@@ -68,3 +68,10 @@ Status: **APPROVED FOR HACKATHON MVP — React + TypeScript frontend with Python
 
 ## Future integrations
 Verified career-data imports, real scholarships, persistence, authentication, and production deployment require separate decisions. The Gemma 4-powered student-facing Career Assistant is explicitly approved.
+
+
+## Approved runtime AI — Career Assistant only
+- Runtime model: Gemma 4, called by the FastAPI backend for TASK-014.
+- Default local serving option: Ollama; initial defaults `OLLAMA_BASE_URL=http://localhost:11434` and `GEMMA_MODEL=gemma4:e2b`. Validate the exact tag and available hardware during implementation.
+- Keep model inference server-side. Never expose provider keys or call model endpoints from React.
+- Hosted Gemma inference is an optional fallback only after an explicit team decision. All other application logic remains deterministic; no RAG, embeddings or vector database.
