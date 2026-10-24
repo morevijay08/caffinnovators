@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const selectedCareer = careers.find(c => c.id === selectedCareerId);
   const comparedCareers = useMemo(() => comparison.map(id => careers.find(c => c.id === id)).filter((c): c is CareerSummary => Boolean(c)), [careers, comparison]);
   function toggleComparison(id: string) {
-    setComparison(current => current.includes(id) ? current.filter(key => key !== id) : current.length < 3 ? [...current, id] : current);
+    setComparison(comparison.includes(id) ? comparison.filter(key => key !== id) : comparison.length < 3 ? [...comparison, id] : comparison);
   }
   return <main className="dashboard-page"><div className="container dashboard-content">
     <span className="eyebrow">MY LIFEPath JOURNEY</span><h1>Your exploration dashboard</h1>
