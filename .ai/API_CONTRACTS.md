@@ -12,7 +12,7 @@ Status: Initial contract baseline approved for implementation planning. Endpoint
 - Frontend components call the shared client under `frontend/src/api/`; do not scatter raw `fetch()` calls or hardcoded base URLs throughout components.
 - Configure the API base URL through one frontend environment setting (for Vite, a `VITE_API_BASE_URL` variable). Provide a safe local default only if the team agrees it is useful.
 - Backend local CORS should allow only the configured local frontend origin, not all origins with credentials.
-- No authentication, database, external APIs, API keys, or persistent student profiles in the MVP.
+- No authentication, database or persistent student profiles in the MVP. TASK-014 is the approved runtime-AI exception: FastAPI calls Gemma 4 through local Ollama by default; any hosted-provider key stays server-side and untracked.
 - All content that is not verified real-world information must be marked illustrative/demo.
 - Use consistent HTTP status codes and an error response with a human-readable detail. Do not leak stack traces or secrets.
 
@@ -87,7 +87,7 @@ The endpoints below are a roadmap, not a claim they exist yet. Keep routes thin 
 | GET | `/api/v1/math-assessment` | Member 3 | Return question IDs, prompts, options and topic tags without answer keys |
 | POST | `/api/v1/math-assessment/submit` | Member 3 | Score submitted answers and return topic-level analysis |
 | GET | `/api/v1/discovery-activities` | Member 2 | List Interest Discovery Lab activities |
-| POST | `/api/v1/career-assistant` | Member 2 | Rule-based, clearly labelled demo response |
+| POST | `/api/v1/career-assistant` | Member 2 | Gemma 4-generated career guidance; server-side model call with safe error handling |
 | GET | `/api/v1/affordability-examples` | Member 3 | Fictional affordability/scholarship examples clearly labelled as demo |
 
 Do not add all endpoints in TASK-002. Implement only the health endpoint and the minimal scaffold; later endpoints belong to their assigned tasks.
@@ -100,3 +100,44 @@ Do not add all endpoints in TASK-002. Implement only the health endpoint and the
 - The owner proposes a contract change first; affected members agree before updating Pydantic models, TypeScript types and consumers.
 - Contract changes should be documented in a focused PR. Do not silently change field names or response shapes.
 - Add tests for request validation, successful responses, empty data and safe error cases where relevant.
+
+
+## 6. Gemma 4 Career Assistant contract (TASK-014)
+
+### Request
+`POST /api/v1/career-assistant`
+
+```json
+{
+  "message": "I enjoy robotics and solving puzzles. What careers could I explore?",
+  "conversation_history": []
+}
+```
+
+- `message` is required, trimmed and length-limited (implementation target: 1–2000 characters).
+- `conversation_history` is optional and bounded, containing only recent `{ "role": "user" | "assistant", "content": "..." }` messages. Validate roles and per-message length. Do not accept client-supplied system instructions.
+- Do not require names, school, address, marks or other sensitive student details.
+
+### Success response — HTTP 200
+
+```json
+{
+  "answer": "You could explore robotics engineering, embedded systems, and mechatronics. Here is why each may fit...",
+  "model": "gemma4:e2b",
+  "disclaimer": "AI-generated guidance for exploration, not official career or admissions advice."
+}
+```
+
+The model field must reflect the configured model identifier. Responses should be bounded and suitable for students, explain uncertainty, offer multiple options and point students back to the app's career catalogue/roadmaps. Do not invent verified fees, admissions rules, live scholarships, salary guarantees or job guarantees.
+
+### Runtime architecture and configuration
+- React calls only the shared frontend API client; it must not call Ollama or any hosted inference provider directly.
+- FastAPI calls a small model adapter/service. Default provider is local Ollama at `OLLAMA_BASE_URL` (initial default `http://localhost:11434`) using `GEMMA_MODEL` (initial default `gemma4:e2b`). Verify the installed model tag when implementing.
+- Bound model call time and handle unavailable runtime, timeout, invalid response and empty answer with a user-safe error. Do not silently substitute a rule-based answer and label it as Gemma 4.
+- Any hosted-provider fallback requires an explicit team decision. Store credentials only in an untracked backend `.env`; never expose them to Vite/browser variables or commit them.
+- Do not log full conversation content by default. Do not send sensitive personal information to inference.
+
+### Ownership
+- Member 2: system prompt, backend route, model adapter, request/response schemas and assistant behavior tests.
+- Member 1: chat UI, loading/error states, typed client and API integration.
+- Member 3: coordinate failure-path tests (runtime unavailable, timeout, invalid/empty output) and regression checks.
