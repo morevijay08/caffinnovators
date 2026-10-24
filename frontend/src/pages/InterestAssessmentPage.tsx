@@ -4,6 +4,7 @@ import { getInterestQuestions, submitInterestAnswers } from "../api/interestAsse
 import type { InterestQuestionList, InterestResult } from "../types/interestAssessment";
 import { useStudentJourney } from "../state/StudentJourney";
 import "../styles/interestAssessment.css";
+import CareerRecommendations from "../components/CareerRecommendations";
 
 type LoadState = "loading" | "ready" | "error";
 export default function InterestAssessmentPage() {
@@ -15,6 +16,7 @@ export default function InterestAssessmentPage() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [expired, setExpired] = useState(false);
   const [result, setResult] = useState<InterestResult | null>(null);
+  const [submittedAnswers, setSubmittedAnswers] = useState<{question_id:string;option_id:string}[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   useEffect(() => {
@@ -41,12 +43,14 @@ export default function InterestAssessmentPage() {
     if (Object.keys(answers).length !== questions.questions.length) { setError("Answer every question before submitting."); return; }
     setSubmitting(true); setError("");
     try {
-      const next = await submitInterestAnswers(questions.questions.map(q => ({ question_id: q.id, option_id: answers[q.id] })));
+      const selected = questions.questions.map(q => ({ question_id: q.id, option_id: answers[q.id] }));
+      const next = await submitInterestAnswers(selected);
+      setSubmittedAnswers(selected);
       setResult(next);
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Unable to submit answers."); }
     finally { setSubmitting(false); }
   }
-  function reset() { setAnswers({}); setIndex(0); setTimeLeft(questions?.duration_seconds ?? 0); setExpired(false); setError(""); setResult(null); }
+  function reset() { setAnswers({}); setIndex(0); setTimeLeft(questions?.duration_seconds ?? 0); setExpired(false); setError(""); setResult(null); setSubmittedAnswers([]); }
   const current = questions?.questions[index];
   return <main className="assessment-page"><div className="assessment-shell">
     <span className="eyebrow">INTEREST DISCOVERY</span><h1>What feels exciting to you?</h1>
@@ -54,7 +58,7 @@ export default function InterestAssessmentPage() {
     {!profile && <p className="assessment-notice">You can try this assessment without onboarding. <Link to="/onboarding">Add your student profile</Link> whenever you're ready.</p>}
     {loadState === "loading" && <p role="status">Loading questions…</p>}
     {loadState === "error" && <p role="alert" className="assessment-error">Could not load questions. Start the FastAPI backend and refresh this page.</p>}
-    {result && <section className="assessment-result" aria-live="polite"><h2>Your interest signals</h2><p>Based on the activities you selected, you may enjoy exploring:</p><div className="signal-list">{result.signals.slice(0, 6).map(signal => <div className="signal-item" key={signal.interest}><div><strong>{signal.interest.replaceAll("_"," ")}</strong><span>{signal.evidence}</span></div><span>{signal.score}%</span></div>)}</div><p className="assessment-notice">{result.disclaimer}</p><button type="button" className="btn btn-secondary" onClick={reset}>Try again</button></section>}
+    {result && <section className="assessment-result" aria-live="polite"><h2>Your interest signals</h2><p>Based on the activities you selected, you may enjoy exploring:</p><div className="signal-list">{result.signals.slice(0, 6).map(signal => <div className="signal-item" key={signal.interest}><div><strong>{signal.interest.replaceAll("_"," ")}</strong><span>{signal.evidence}</span></div><span>{signal.score}%</span></div>)}</div><p className="assessment-notice">{result.disclaimer}</p><button type="button" className="btn btn-secondary" onClick={reset}>Try again</button>{submittedAnswers.length > 0 && <CareerRecommendations answers={submittedAnswers} />}</section>}
     {expired && !result && <section className="assessment-result"><h2>Time is up</h2><p>Your answers weren't submitted. You can try again at your own pace.</p><button className="btn btn-primary" type="button" onClick={reset}>Restart assessment</button></section>}
     {loadState === "ready" && questions && !result && !expired && current && <section className="assessment-panel">
       <div className="assessment-meta"><span>Question {index + 1} of {questions.questions.length}</span><span className="assessment-timer" role="timer" aria-label="Time remaining">{String(Math.floor(timeLeft / 60)).padStart(2,"0")}:{String(timeLeft % 60).padStart(2,"0")}</span></div>
