@@ -10,7 +10,7 @@ export default function SiteHeader() {
     <nav id="site-nav" aria-label="Main navigation" className={open ? "site-nav is-open" : "site-nav"}>
       <NavLink to="/" end onClick={close}>Home</NavLink>
       <a href="/#how-it-works" onClick={close}>How it works</a>
-      <a href="/#explore" onClick={close}>Explore paths</a>
+      <Link to="/careers" onClick={close}>Explore careers</Link>
       <Link to="/interest-assessment" onClick={close}>Interest assessment</Link>
       <Link className="nav-cta" to="/onboarding" onClick={close}>Get started <span aria-hidden="true">↗</span></Link>
     </nav>
