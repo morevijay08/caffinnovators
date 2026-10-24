@@ -30,7 +30,7 @@ export default function HomePage() {
         <div className="pill"><span className="pill-dot" /> Career discovery made for Indian students</div>
         <h1>Don't just pick a career. <span className="gradient-text">Discover your path.</span></h1>
         <p className="hero-lead">Your future is bigger than a report card. Explore what you love, discover possibilities and take the next step with confidence.</p>
-        <div className="hero-actions"><Link className="btn btn-primary" to="/onboarding">Explore my future <span aria-hidden="true">↗</span></Link><Link className="btn btn-secondary" to="#all-features">See all features ↗</Link><Link className="btn btn-secondary" to="/assessment">Math Readiness Check ↗</Link><a className="btn btn-secondary" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a></div>
+        <div className="hero-actions"><Link className="btn btn-secondary" to="/auth">Student Login / Register ↗</Link><Link className="btn btn-primary" to="/onboarding">Explore my future <span aria-hidden="true">↗</span></Link><Link className="btn btn-secondary" to="#all-features">See all features ↗</Link><Link className="btn btn-secondary" to="/assessment">Math Readiness Check ↗</Link><a className="btn btn-secondary" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a></div>
         <div className="hero-trust"><span className="avatar-cluster" aria-hidden="true"><i>✦</i><i>★</i><i>◆</i></span><span>Built for the curious, the dreamers, and the still-figuring-it-out.</span></div>
       </div>
       <div className="hero-visual" aria-label="Preview of possible career paths">
