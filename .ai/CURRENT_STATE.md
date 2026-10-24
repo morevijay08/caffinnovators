@@ -20,7 +20,7 @@ Tagline: Every Interest Has a Future.
 
 ## Development AI assistant
 - Gemma 4 is the preferred coding assistant whenever available in the team's chosen environment.
-- Gemma 4 is not a student-facing runtime dependency. The MVP does not require an LLM, API key or hosted model.
+- Gemma 4 is explicitly approved as the student-facing runtime model for the Career Assistant (TASK-014), separate from its optional use as a coding assistant. Default runtime path: FastAPI → local Ollama → configurable Gemma 4 model (`GEMMA_MODEL`, initial default `gemma4:e2b`). A hosted API key is not required for the default local setup.
 
 ## Team
 - Three workstreams are defined in `.ai/TEAM_WORKFLOW.md`.
