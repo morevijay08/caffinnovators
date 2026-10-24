@@ -32,3 +32,9 @@ python -m uvicorn app.main:app --reload --port 8000
 Use `git switch fix/task15-ollama-timeout` if it already exists locally. Test `http://localhost:5173/career-assistant` with the separately running frontend. The first answer can still be slow; an increased timeout does not resolve missing Ollama, model not installed or insufficient hardware.
 
 **Verification:** Changes pushed to GitHub; local tests and actual model response not yet observed. No merge into task15/integration/main.
+
+## Follow-up: incomplete/empty reply
+- The user's next error was HTTP 502 `The career assistant returned an incomplete reply`. This means Ollama's JSON response lacked nonblank `message.content`; it is different from a timeout.
+- Request `think: false` using Ollama's supported chat parameter and raise `num_predict` to 600 to leave room for a final answer. Do not display internal model thinking as the answer.
+- Added an assertion in the mocked API test for `think: false` and the generation budget.
+- If HTTP 502 persists, inspect Ollama version and model tag and request `/api/chat` directly. The app still refuses to invent AI text from an empty model response. Local verification pending.
