@@ -30,3 +30,11 @@ LifePath India — Every Interest Has a Future. Interest-first career guidance w
 
 ## Coordination rule
 Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_WORKFLOW.md`, roadmap, assignments, and current task documentation on the *actual working branch* at every new task. Preserve decisions from other member branches; update progress only with observed facts.
+
+## TASK-005 branch work (2026-10-25, branch task4)
+- New branch `task4` based on `task3`; other Member 2 TASK-007 branch was not merged.
+- Implemented six-question illustrative interest assessment, deterministic Python scoring, Pydantic schemas, GET/POST FastAPI routes, API tests, React timed UI and onboarding navigation.
+- Task details and exact manual checks are in `TASK_005_REVIEW.md`.
+- No backend server-enforced timeout and no durable result persistence. Career recommendations belong to TASK-007.
+- GitHub file commits completed; npm build, pytest and browser interaction checks require local user verification. **Do not mark DONE or merged yet.**
+- Next Member 2 task once tested: TASK-006 career catalogue. Career ranking TASK-007 requires TASK-005 and TASK-006 to share signals/tags.

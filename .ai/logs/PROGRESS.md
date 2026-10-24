@@ -41,3 +41,10 @@
 - User initially opened malformed URL `/onboarding**?utm_source=chatgpt.com` and saw intended 404 page; corrected `http://localhost:5173/onboarding` subsequently worked per user.
 - Remaining: record `npm run build`, backend tests, full onboarding flow review; merge approved task branches to `integration` using PRs. No Member 2/3 backend implementation was modified by Member 1's onboarding work.
 - This entry records branch-level implementation, not verified release completion.
+
+## 2026-10-25 — TASK-005 implementation on task4
+- Added backend interest question fixtures, deterministic scoring service, Pydantic input/output models, interest API route and pytest tests.
+- Added React interest assessment page with six-minute client-side timer, previous/next selection validation, result explanations and retry.
+- Wired onboarding completion and header navigation to assessment route.
+- Preserved all TASK-002/003/004 code, avoiding other teammates' feature branches.
+- Documentation in `TASK_005_REVIEW.md` includes exact testing steps and known limitations. Full tests not yet observed.
