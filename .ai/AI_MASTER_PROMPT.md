@@ -51,3 +51,7 @@ No database is required. The approved chatbot requires Gemma 4 inference; use lo
 
 ## Completion gate
 Run relevant checks, inspect changes, verify each acceptance criterion, update `.ai/CURRENT_STATE.md`, `.ai/logs/PROGRESS.md`, and `.ai/logs/CHANGELOG.md`, record decisions if needed, and stop after the assigned task.
+
+
+## Runtime Gemma 4 rule (user-approved)
+Gemma 4 is both an optional development assistant and the approved runtime model for the student-facing Career Assistant in TASK-014. These are separate roles. The runtime call must be made server-side by FastAPI through local Ollama by default; React must never call the model directly. Do not add hosted inference unless the team explicitly chooses it. Deterministic scoring and career matching must remain independent of the LLM.
