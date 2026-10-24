@@ -12,6 +12,7 @@ export default function SiteHeader() {
       <a href="/#how-it-works" onClick={close}>How it works</a>
       <Link to="/careers" onClick={close}>Explore careers</Link>
       <Link to="/interest-assessment" onClick={close}>Interest assessment</Link>
+      <Link to="/scholarships" onClick={close}>Scholarships & costs</Link>
       <Link to="/change-path" onClick={close}>Change my path</Link>
       <Link to="/dashboard" onClick={close}>Dashboard</Link>
       <Link className="nav-cta" to="/onboarding" onClick={close}>Get started <span aria-hidden="true">↗</span></Link>
