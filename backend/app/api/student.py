@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.models.student import Student, StudentJourney, StudentSession
+from app.schemas.math_readiness import MathAssessmentResult
 from app.schemas.student import (
     Assessment, ChatMessage, Credentials, JourneyData, JourneyPatch, PathChange, Profile, StudentIdentity,
 )
@@ -26,7 +27,7 @@ FIELDS = {
     "pathHistory": TypeAdapter(list[PathChange]),
     "reflections": TypeAdapter(dict[str,str]),
     "chatHistory": TypeAdapter(list[ChatMessage]),
-    "mathResult": TypeAdapter(__import__("app.schemas.math_readiness", fromlist=["MathAssessmentResult"]).MathAssessmentResult | None),
+    "mathResult": TypeAdapter(MathAssessmentResult | None),
     "comparison": TypeAdapter(list[str]),
 }
 
@@ -90,8 +91,10 @@ def logout(request: Request, response: Response, db: Session = Depends(get_db)):
     require_same_origin(request)
     token = request.cookies.get(COOKIE_NAME)
     if token:
-        db.delete(db.get(StudentSession, hashlib.sha256(token.encode()).hexdigest())) if db.get(StudentSession, hashlib.sha256(token.encode()).hexdigest()) else None
-        db.commit()
+        session = db.get(StudentSession, hashlib.sha256(token.encode()).hexdigest())
+        if session is not None:
+            db.delete(session)
+            db.commit()
     response.delete_cookie(COOKIE_NAME, path="/")
 
 @router.get("/journey", response_model=JourneyData)
