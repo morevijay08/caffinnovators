@@ -4,9 +4,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.api.interest_assessment import router as interest_router
+from app.api.careers import router as careers_router
 
 app = FastAPI(title="LifePath India API", version="0.1.0")
 app.include_router(interest_router)
+app.include_router(careers_router)
 frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
 app.add_middleware(
     CORSMiddleware,
