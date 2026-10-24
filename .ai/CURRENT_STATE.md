@@ -87,3 +87,7 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - Branch `task13` extends `task12` and adds `GET /api/v1/careers/{career_id}/roadmap`, Pydantic models, deterministic four-stage illustrative roadmaps for all twelve catalogue careers, React career-profile timeline, responsive CSS and dedicated API tests.
 - Existing career detail response shape remains unchanged; typed frontend fetch calls the new child endpoint. Safe 404, loading/retry and disclaimers included. Contract appended to .ai/API_CONTRACTS.md. See TASK_008_REVIEW.md.
 - GitHub commits complete. Build, pytest, browser acceptance and shared team integration remain unverified; no merge to main/integration.
+
+## TASK-013 — Member 2 Discovery Lab (task14)
+- Added six illustrative activities, typed GET /api/v1/discovery-activities with interest filter, React /discovery-lab page and temporary reflection state. See TASK_013_REVIEW.md.
+- Four backend tests added; local execution and browser build unverified. No database, aptitude diagnosis or score; no shared merge.
