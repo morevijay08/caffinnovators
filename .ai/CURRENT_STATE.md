@@ -82,3 +82,8 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - `task12` extends `task11` and adds HACKATHON_DEMO_SCRIPT.md with a five-minute walkthrough and realistic judge Q&A.
 - Added TASK_020_REVIEW.md with full test gates, team signoffs, browser walkthrough, and final integration PR/merge review.
 - This is documentary delivery only: no source-code or dependency changes, no claims that member 2/3 features have been integrated, and no claims that local tests are already green. Readiness is pending real verification on task12 and shared integration branch.
+
+## TASK-008 — Member 2 career roadmaps (task13)
+- Branch `task13` extends `task12` and adds `GET /api/v1/careers/{career_id}/roadmap`, Pydantic models, deterministic four-stage illustrative roadmaps for all twelve catalogue careers, React career-profile timeline, responsive CSS and dedicated API tests.
+- Existing career detail response shape remains unchanged; typed frontend fetch calls the new child endpoint. Safe 404, loading/retry and disclaimers included. Contract appended to .ai/API_CONTRACTS.md. See TASK_008_REVIEW.md.
+- GitHub commits complete. Build, pytest, browser acceptance and shared team integration remain unverified; no merge to main/integration.
