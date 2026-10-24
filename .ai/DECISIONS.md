@@ -23,7 +23,7 @@ Status: APPROVED by explicit user instruction on 2026-10-24.
 - Frontend: React + TypeScript + Vite, React Router and custom CSS.
 - Backend: Python 3.11+, FastAPI, Pydantic and Uvicorn.
 - Communication: typed frontend Fetch API client and documented JSON API contracts.
-- Data: static fictional/demo content; no database, authentication, paid API or required external service.
+- Data: static fictional/demo content; no database or authentication. The approved Career Assistant requires a local Gemma 4 runtime by default; no hosted inference service or paid API is required unless explicitly selected.
 - Rationale: user chose Option B to gain more control over a polished, interactive frontend while keeping Python for domain logic.
 - Delivery guardrail: implement incrementally; do not rewrite the entire app in one task. TASK-002 creates the minimal runnable skeleton and API contract baseline.
 
