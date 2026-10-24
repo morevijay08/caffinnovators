@@ -18,8 +18,8 @@ Status: **APPROVED FOR HACKATHON MVP — React + TypeScript frontend with Python
 - Pydantic models for request/response validation and shared API shapes.
 - Uvicorn as the local ASGI development server.
 - Python standard library for deterministic scoring, timers/business rules, and utilities.
+- SQLAlchemy 2.x ORM with SQLite for anonymous math-assessment attempt persistence (approved change, TASK-009A).
 - Pandas only where structured data processing provides value.
-- No database for the MVP; use fictional/static demo data and explicitly documented in-memory/session behaviour.
 
 ## Testing
 - pytest for Python services and API tests.
@@ -38,7 +38,7 @@ Status: **APPROVED FOR HACKATHON MVP — React + TypeScript frontend with Python
 - Tailwind, Bootstrap, shadcn/ui or another styling/component framework.
 - LangChain, LangGraph, vector DB, embeddings or RAG.
 - Unapproved AI providers or paid APIs. Gemma 4 runtime inference for TASK-014 is explicitly approved; follow `.ai/ARCHITECTURE.md` and `.ai/API_CONTRACTS.md`.
-- PostgreSQL, MongoDB, Supabase, Firebase, Redis, or any other database.
+- PostgreSQL, MongoDB, Supabase, Firebase, Redis, or other databases; SQLite is the sole approved database for anonymous math-assessment attempts.
 - Authentication, analytics SDKs, paid APIs, or required external services.
 - Any package added without demonstrated need and explicit approval.
 
@@ -57,8 +57,8 @@ Status: **APPROVED FOR HACKATHON MVP — React + TypeScript frontend with Python
 
 ## State and data
 - Demo content is local and fictional/illustrative unless verified.
-- No durable user profile storage or database in the MVP.
-- Do not claim browser or in-memory progress survives refresh, a new session, or a server restart unless implemented and verified.
+- SQLite persists anonymous math-assessment result snapshots only; it does not create student accounts or durable student profiles.
+- Do not claim anonymous attempts are tied to a student identity or that data survives deployment replacement unless verified.
 - API contracts are documented in `.ai/API_CONTRACTS.md`; keep TypeScript types and Pydantic schemas aligned.
 
 ## Local development and deployment
