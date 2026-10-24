@@ -67,7 +67,7 @@ Status: **APPROVED FOR HACKATHON MVP — React + TypeScript frontend with Python
 - No secrets or external API keys should be required for the MVP.
 
 ## Future integrations
-Verified career-data imports, real scholarships, persistence, authentication, and production deployment require separate decisions. The Gemma 4-powered student-facing Career Assistant is explicitly approved.
+Verified career-data imports, real scholarships, authentication, and production deployment require separate decisions. SQLite persistence is approved only for anonymous math-assessment result snapshots under TASK-009A. The Gemma 4-powered student-facing Career Assistant is explicitly approved.
 
 
 ## Approved runtime AI — Career Assistant only
