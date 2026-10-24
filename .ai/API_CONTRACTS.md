@@ -150,3 +150,8 @@ The model field must reflect the configured model identifier. Responses should b
 
 ## TASK-013 implemented discovery activities contract (task14)
 GET `/api/v1/discovery-activities` with optional `interest` filter (case-insensitive category, max 40 chars). HTTP 200: `{activities: [{id,title,interest_tags,duration_minutes,materials,instructions,reflection_prompt,illustrative}], total}`. Invalid oversized filters return HTTP 422. Student reflections remain only in frontend React component memory; no POST or server persistence. This branch-local addition requires normal team review.
+
+## TASK-014 branch implementation notes (`task15`)
+- Implemented `POST /api/v1/career-assistant` according to section 6: trimmed required `message` (1–2000 chars), optional `conversation_history` (up to 10 `user`/`assistant` entries, each 1–2000 chars), success `{answer,model,disclaimer}`.
+- Safe failures: 422 input validation, 503 Ollama unavailable, 504 timeout, 502 malformed/empty model answer. A 30s model-call timeout and output bound are applied. Gemma 4 model tag is configured by `GEMMA_MODEL`; Ollama URL by `OLLAMA_BASE_URL`, backend-only.
+- React `/career-assistant` calls only FastAPI. No persistent chat storage or browser connection to Ollama. Requires explicit cross-owner review because Member 1 owns chat UI and Member 3 coordinates failure testing.
