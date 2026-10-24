@@ -61,7 +61,7 @@ export default function OnboardingPage() {
       <div className="onboarding-actions">
         <button className="btn btn-secondary" type="button" onClick={() => { setDraft(createDraft(profile)); setStep(0); setFinished(false); }}>Edit answers</button>
         <button className="btn btn-outline-danger" type="button" onClick={restart}>Clear answers</button>
-        <Link className="btn btn-primary" to="/">Back to home ↗</Link>
+        <Link className="btn btn-primary" to="/interest-assessment">Start interest assessment ↗</Link>
       </div>
     </section></main>;
   }
