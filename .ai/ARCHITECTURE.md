@@ -52,3 +52,6 @@ Rule-based recommendations are heuristics and must explain matching signals. Sho
 - React must never call the Ollama endpoint directly. Add a bounded timeout, safe error handling, input length limits and bounded conversation history.
 - If local inference is not feasible, a hosted Gemma provider requires an explicit team decision; credentials must remain server-side and untracked.
 - Keep LLM use limited to conversational career exploration. Interest scoring, career match ranking and math assessment results remain deterministic Python logic.
+
+## Post-MVP review branch: Student account and persistence architecture
+In `feature/student-auth-persistence-ollama-integration` the student's browser uses credentialled Fetch calls to FastAPI. Pseudonymous credentials are validated server-side; SQLite stores PBKDF2-hashed passwords and only SHA256 hashes of random session tokens. The browser receives an HttpOnly cookie; `GET/PATCH /api/v1/journey` reads/writes account-isolated profile, interest assessment, path history, Discovery Lab reflections, latest math result, dashboard comparisons and Gemma chat history. CORS restricts credentialled requests to configured frontend origin. Local SQLite is not encrypted at rest; production use needs further consent, rate limiting, secure HTTPS cookies and audit.
