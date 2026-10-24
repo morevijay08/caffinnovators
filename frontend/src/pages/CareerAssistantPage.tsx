@@ -1,11 +1,12 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+import { useStudentJourney } from "../state/StudentJourney";
 import { askCareerAssistant } from "../api/careerAssistant";
 import type { AssistantMessage } from "../types/careerAssistant";
 import "../styles/careerAssistant.css";
 
 export default function CareerAssistantPage() {
-  const [messages, setMessages] = useState<AssistantMessage[]>([]);
+  const { chatHistory: messages, setChatHistory: setMessages } = useStudentJourney();
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -33,7 +34,7 @@ export default function CareerAssistantPage() {
     <span className="eyebrow">CAREER ASSISTANT</span>
     <h1>Ask about your possibilities.</h1>
     <p className="assistant-intro">Explore interests, activities and potential careers with Gemma 4 through a local Ollama model. This is guidance, not a decision about your future.</p>
-    <div className="assistant-note">Please avoid sharing personal details such as your full name, contact information, school or marks. Chat messages are sent to the locally configured AI service; the application does not store a chat history in a database.</div>
+    <div className="assistant-note">Please avoid sharing personal details such as your full name, contact information, school or marks. Chat messages are sent to the locally configured AI service; Your chat history is saved to your student account. Do not share identifying details.</div>
     <section className="assistant-chat" aria-label="Career assistant conversation">
       {messages.length === 0 && <div className="assistant-empty">
         <h2>Not sure where to begin?</h2>
