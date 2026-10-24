@@ -5,3 +5,8 @@ __pycache__/
 .env
 .env.*
 !.env.example
+# Never commit student account databases or local SQLite journals.
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
