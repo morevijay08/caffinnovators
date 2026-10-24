@@ -53,3 +53,8 @@
 - Added 12 illustrative career records, catalogue service, Pydantic API schema and GET list/detail endpoints.
 - Added typed React search/cluster filter, grid, details, empty/error/loading views and navigation.
 - Added backend tests; local pytest/frontend build/browser walkthrough awaiting user confirmation.
+
+## 2026-10-25 — TASK-007 branch task6
+- Implemented server-scored deterministic career matches, explainable ranking and POST API with Pydantic validation.
+- Connected completed interest quiz to five career suggestions and illustrative catalogue detail pages.
+- Added API tests. Live builds, test execution and integration are pending user review.
