@@ -1,37 +1,37 @@
 # MASTER ROADMAP — LIFEPath INDIA
 
-Tasks follow dependency order, but independent tasks may run in parallel when the shared skeleton and interfaces are ready. Use `.ai/roadmap/MEMBER_TASK_ASSIGNMENTS.md` for owners and dependencies. Mark DONE only after acceptance criteria are verified.
+Tasks follow dependency order. Independent work may run in parallel only after required frontend/backend foundations and API contracts are merged. See `.ai/roadmap/MEMBER_TASK_ASSIGNMENTS.md`. Mark DONE only after acceptance criteria are verified.
 
 ## Phase 0 — Product contract, skeleton and core discovery
-- [x] TASK-001 — Inspect reference, lock product/stack and create .ai control files.
-- [ ] TASK-002 — Initialize Streamlit skeleton and application shell. **Owner: Member 1; integration prerequisite.**
-- [ ] TASK-003 — Design system, responsive landing page and navigation. **Owner: Member 1; depends on TASK-002.**
-- [ ] TASK-004 — Student onboarding and session state. **Owner: Member 1; depends on TASK-002/003 and shared state contract.**
-- [ ] TASK-005 — Timed interest assessment with reflection and explainable scoring. **Owner: Member 2; depends on TASK-002/004 and assessment contract.**
+- [x] TASK-001 — Define product and create AI/project-control documentation.
+- [ ] TASK-002 — Initialize React + TypeScript/Vite frontend and FastAPI backend skeleton; establish local run commands and API contract baseline. **Owner: Member 1 coordinates; Members 2/3 review service/API boundaries; integration prerequisite.**
+- [ ] TASK-003 — React design system, responsive landing page and routing. **Owner: Member 1; depends on TASK-002.**
+- [ ] TASK-004 — Student onboarding and temporary client state. **Owner: Member 1; depends on TASK-002/003 and state/API contract.**
+- [ ] TASK-005 — Timed interest assessment and explainable scoring service/API. **Owner: Member 2; depends on TASK-002/004 and assessment contract.**
 
 ## Phase 1 — Parallel feature work after contracts are merged
-- [ ] TASK-006 — Fictional career catalogue and Career Explorer. **Owner: Member 2; depends on TASK-002/003 and career data contract.**
-- [ ] TASK-007 — Explainable multi-career recommendation engine. **Owner: Member 2; depends on TASK-005/006.**
-- [ ] TASK-008 — Detailed career page and illustrative year-by-year roadmap with transparent cost labels. **Owner: Member 2; depends on TASK-006/007.**
-- [ ] TASK-009 — Timed Math Readiness Assessment with topic tags. **Owner: Member 3; depends on TASK-002/003 and assessment contract.**
-- [ ] TASK-010 — Topic analysis, supportive improvement plan, progress checklist and retest. **Owner: Member 3; depends on TASK-009.**
-- [ ] TASK-011 — Change My Path while preserving achievements and progress. **Owner: Member 1; depends on TASK-004/007 and shared state contract.**
-- [ ] TASK-012 — Student dashboard and comparison of up to three careers. **Owner: Member 1; depends on TASK-004/007/010/011.**
+- [ ] TASK-006 — Fictional career catalogue and Career Explorer. **Owner: Member 2; depends on TASK-002/003 and career data/API contract.**
+- [ ] TASK-007 — Explainable multi-career recommendation service/API. **Owner: Member 2; depends on TASK-005/006.**
+- [ ] TASK-008 — Career detail and illustrative year-by-year roadmap via API. **Owner: Member 2; depends on TASK-006/007.**
+- [ ] TASK-009 — Timed Math Readiness Assessment and topic-tagged questions via API. **Owner: Member 3; depends on TASK-002 and assessment contract.**
+- [ ] TASK-010 — Topic analysis, supportive improvement plan, checklist and retest service/API. **Owner: Member 3; depends on TASK-009.**
+- [ ] TASK-011 — Change My Path while preserving completed client-side progress. **Owner: Member 1; depends on TASK-004/007 and shared state contract.**
+- [ ] TASK-012 — Dashboard and comparison of up to three careers. **Owner: Member 1; depends on TASK-004/007/010/011 and API contracts.**
 
 ## Phase 2 — Secondary demo modules
 - [ ] TASK-013 — Interest Discovery Lab activities and reflection. **Owner: Member 2; depends on TASK-005/006.**
-- [ ] TASK-014 — Transparent rule-based Career Assistant. **Owner: Member 2; depends on TASK-006/007/008.**
-- [ ] TASK-015 — Fictional scholarship/affordability demo page. **Owner: Member 3; depends on agreed fictional-data schema and TASK-002.**
-- [ ] TASK-016 — Feedback page and navigation/empty states. **Owner: Member 1; depends on TASK-003/004 and feature integration.**
+- [ ] TASK-014 — Transparent rule-based Career Assistant API/UI. **Owner: Member 2; depends on TASK-006/007/008; no LLM required.**
+- [ ] TASK-015 — Fictional scholarship/affordability demo using static data. **Owner: Member 3; depends on TASK-002 and demo-data contract.**
+- [ ] TASK-016 — Feedback, loading, empty and error states. **Owner: Member 1; depends on TASK-003/004 and feature integration.**
 
 ## Phase 3 — Verification and demo readiness
-- [ ] TASK-017 — Unit-test coordination for assessment, recommendations, improvement plan and path changes. **Coordinator: Member 3; each feature owner writes tests for their own logic.**
-- [ ] TASK-018 — End-to-end manual smoke test and bug fixes. **Coordinator: Member 1; all members fix issues in their owned modules.**
-- [ ] TASK-019 — README, setup instructions and accurate limitations. **Coordinator: Member 1; all members contribute accurate setup/feature notes.**
-- [ ] TASK-020 — Hackathon demo script and final repository verification. **Coordinator: Member 1; all members verify their feature paths.**
+- [ ] TASK-017 — Coordinate frontend/backend tests and API contract coverage. **Coordinator: Member 3; every feature owner tests their own logic.**
+- [ ] TASK-018 — End-to-end smoke test and integration fixes. **Coordinator: Member 1; all members fix issues in owned modules.**
+- [ ] TASK-019 — README, two-process local setup, API configuration and limitations. **Coordinator: Member 1; all contribute accurate notes.**
+- [ ] TASK-020 — Hackathon demo script and final repository verification. **Coordinator: Member 1; all members verify their feature journeys.**
 
 ## MVP definition of done
-A judge can start at the landing page, complete onboarding and an interest assessment, review explained multiple career options, open a roadmap, take a timed math test, receive topic-level feedback and an improvement plan, then change career path without losing completed progress. The app runs with `streamlit run app.py` and requires no secret/API key or database.
+A judge can complete onboarding and interest assessment, review multiple explained career options, open a roadmap, take a timed math test, receive topic-level feedback and an improvement plan, and change career path without losing completed progress. The React frontend and FastAPI backend run locally using documented commands. No secret/API key, database, or external AI service is required.
 
 ## Scope rule
-This roadmap is a delivery plan, not permission to implement everything in one pass. Members work only on assigned tasks whose dependencies are merged into `integration`. Do not introduce a student-facing AI model without explicit approval.
+This roadmap is a delivery plan, not permission to implement everything in one pass. Work only on assigned tasks whose dependencies and API contracts are integrated. Do not introduce a student-facing AI model without explicit approval.
