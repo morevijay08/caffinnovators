@@ -44,3 +44,10 @@ TASK-002 — Initialize React + TypeScript/Vite frontend and FastAPI backend ske
 
 ## Completion standard
 A task is complete only when its acceptance criteria are checked and relevant validation evidence exists. Creating documentation alone does not prove application functionality.
+
+
+## Approved runtime AI change (2026-10-24)
+- The user explicitly requires Gemma 4 to power the student-facing chatbot at runtime.
+- TASK-014 is a real model integration behind FastAPI; local Ollama is the default. Initial configurable defaults are `OLLAMA_BASE_URL=http://localhost:11434` and `GEMMA_MODEL=gemma4:e2b`.
+- Hosted inference is optional only by explicit team decision. Deterministic career matching and assessment scoring are unchanged.
+- Documentation is updated/planned; no runtime model call or chatbot implementation is claimed yet.
