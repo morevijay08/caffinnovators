@@ -38,3 +38,9 @@ Read `.ai/AI_RULES.md`, `.ai/TECH_STACK.md`, `.ai/API_CONTRACTS.md`, `.ai/TEAM_W
 - No backend server-enforced timeout and no durable result persistence. Career recommendations belong to TASK-007.
 - GitHub file commits completed; npm build, pytest and browser interaction checks require local user verification. **Do not mark DONE or merged yet.**
 - Next Member 2 task once tested: TASK-006 career catalogue. Career ranking TASK-007 requires TASK-005 and TASK-006 to share signals/tags.
+
+## TASK-006 implementation (branch task5)
+- Built illustrative twelve-career dataset, catalogue service, FastAPI GET /api/v1/careers with search/cluster, GET /api/v1/careers/{career_id}, typed React Career Explorer and detail pages.
+- TASK-005 signal tags are aligned with career interest_tags; no recommendation ranking until TASK-007.
+- GitHub implementation committed, but browser tests, npm build and pytest still require user verification. See TASK_006_REVIEW.md.
+- Branch chain: task1 → task2 → task3 → task4 → task5. Shared integration merge remains separate.

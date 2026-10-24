@@ -43,3 +43,7 @@
 - `task4` extends `task3` with an illustrative six-question interest assessment.
 - Adds FastAPI GET/POST assessment API, deterministic scoring and unit/API tests; adds typed React assessment view and navigation.
 - No new third-party dependencies, database or Gemma runtime use. Test evidence and integration merge pending.
+
+## TASK-006 — task5
+- Career catalogue API, static fictional dataset, React Career Explorer and illustrative detail route.
+- No new dependencies, external services, database, recommendations or roadmap implementation. Tests pending local execution.

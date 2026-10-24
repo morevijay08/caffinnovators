@@ -48,3 +48,8 @@
 - Wired onboarding completion and header navigation to assessment route.
 - Preserved all TASK-002/003/004 code, avoiding other teammates' feature branches.
 - Documentation in `TASK_005_REVIEW.md` includes exact testing steps and known limitations. Full tests not yet observed.
+
+## TASK-006 — Career Explorer development (task5)
+- Added 12 illustrative career records, catalogue service, Pydantic API schema and GET list/detail endpoints.
+- Added typed React search/cluster filter, grid, details, empty/error/loading views and navigation.
+- Added backend tests; local pytest/frontend build/browser walkthrough awaiting user confirmation.
