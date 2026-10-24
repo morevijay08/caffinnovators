@@ -26,3 +26,40 @@ ALTERNATE_QUESTIONS = [
 ]
 QUESTION_SETS = [QUESTIONS, ALTERNATE_QUESTIONS[:6], ALTERNATE_QUESTIONS[6:]]
 ALL_QUESTIONS = [question for group in QUESTION_SETS for question in group]
+
+# Profile-aware question themes. Each theme is asked in six distinct ways, with
+# balanced options that let the learner express *which part* they enjoy.
+INTEREST_THEMES = {
+ "technology": ("building digital tools", "code a useful app", "design a clear interface", "help someone learn a new device"),
+ "science": ("investigating scientific ideas", "test a hypothesis", "draw a clear experiment diagram", "explain findings to classmates"),
+ "design": ("creating a new product", "prototype a useful feature", "sketch its visual style", "learn what people need"),
+ "writing": ("telling a compelling story", "research facts carefully", "create an illustrated story", "share a message with a community"),
+ "business": ("running a small enterprise", "calculate a product budget", "design a brand identity", "help customers solve problems"),
+ "helping_people": ("supporting other people", "develop a practical support tool", "make friendly visual instructions", "listen to someone’s concerns"),
+ "environment": ("protecting the environment", "measure waste or water use", "design a recycling poster", "bring neighbours together"),
+ "arts": ("creating an art project", "experiment with creative technology", "develop a visual concept", "make an artwork with a social message"),
+ "mathematics": ("exploring mathematical patterns", "solve a challenging logic puzzle", "visualise patterns in a diagram", "teach a friend a new concept"),
+ "sports": ("organising sports activities", "analyse team performance", "design team merchandise", "coach or encourage teammates"),
+}
+# Each slot uses a new angle while maintaining stable, server-validated choices.
+ANGLES = [
+ "Imagine a weekend exploring {theme}. Which role sounds most enjoyable?",
+ "For a school project about {theme}, what would you choose first?",
+ "If you had to solve a challenge involving {theme}, what would you enjoy?",
+ "During a club activity about {theme}, where would you contribute?",
+ "Which achievement involving {theme} would make you proud?",
+ "What skill related to {theme} would you want to try next?",
+]
+TAILORED_QUESTIONS = []
+for key, (theme, analytical, creative, social) in INTEREST_THEMES.items():
+    for slot, angle in enumerate(ANGLES):
+        TAILORED_QUESTIONS.append({
+            "id": f"custom_{key}_{slot}",
+            "prompt": angle.format(theme=theme),
+            "options": [
+                {"id":"a","text":analytical.capitalize(),"signals":[key,"problem_solving"]},
+                {"id":"b","text":creative.capitalize(),"signals":[key,"design" if key != "design" else "arts"]},
+                {"id":"c","text":social.capitalize(),"signals":[key,"helping_people" if key != "helping_people" else "writing"]},
+            ],
+        })
+ALL_QUESTIONS.extend(TAILORED_QUESTIONS)
