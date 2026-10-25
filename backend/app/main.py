@@ -16,6 +16,17 @@ from app.db import init_db
 
 app = FastAPI(title="LifePath India API", version="0.1.0")
 
+
+@app.get("/")
+def root() -> dict[str, str]:
+    """Provide a friendly landing response for the deployed API root URL."""
+    return {
+        "message": "LifePath India API is running.",
+        "docs": "/docs",
+        "health": "/health",
+        "openapi": "/openapi.json",
+    }
+
 app.include_router(interest_router)
 app.include_router(careers_router)
 app.include_router(recommendations_router)
